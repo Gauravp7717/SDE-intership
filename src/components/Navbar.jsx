@@ -20,6 +20,8 @@ import Home from "../pages/Home";
 import UnitList from "../pages/UnitList";
 import PaymentType from "../pages/PaymentTypes";
 import TaxList from "../pages/TaxList";
+import ChangePass from "../pages/ChangePass";
+import StoreTab from "../pages/StoreTab";
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -30,6 +32,8 @@ export default function Dashboard() {
     "/unitlist": <UnitList />,
     "/paymenttype": <PaymentType />,
     "/taxlist": <TaxList />,
+    "/changepass": <ChangePass />,
+    // "/storetab": <StoreTab />,
   };
   const menuItems = [
     { name: "Dashboard", icon: LayoutDashboard, path: "/" },
@@ -40,12 +44,12 @@ export default function Dashboard() {
   ];
 
   const settingsSubmenu = [
-    { name: "Store", icon: Store, path: "/store" },
+    { name: "Store", icon: Store, path: "/storetab" },
     { name: "SMS/WhatsApp API", icon: MessageSquare, path: "/smsapi" },
     { name: "Tax List", icon: Percent, path: "/taxlist" },
     { name: "Units List", icon: List, path: "/unitlist" },
     { name: "Payment Types", icon: CreditCard, path: "/paymenttype" },
-    { name: "Change Password", icon: Lock, path: "/changepassword" },
+    { name: "Change Password", icon: Lock, path: "/changepass" },
   ];
 
   const CurrentPage = routeComponents[location.pathname] || (
