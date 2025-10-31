@@ -24,6 +24,10 @@ import StoreTab from "../pages/StoreTab";
 import Footer from "./Footer";
 import DashboardScreen from "../pages/DashboardScreen";
 import SmsApi from "../pages/SmsApi";
+import Tenants from "../pages/Tenants";
+import PlansSection from "../pages/PlansSection";
+import SubscriptionsSection from "../pages/SubscriptionsSection";
+import UsersSection from "../pages/UsersSection";
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -39,6 +43,10 @@ export default function Dashboard() {
     "/storetab": <StoreTab />,
     "/": <DashboardScreen />,
     "/smsapi": <SmsApi />,
+    "/tenants":<Tenants />,
+    "/plans" : <PlansSection />,
+    "/subscriptions" :<SubscriptionsSection/>, 
+    "/users" : <UsersSection />,
   };
 
   const CurrentPage = routeComponents[location.pathname] || (
