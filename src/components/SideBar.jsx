@@ -24,7 +24,6 @@ import StoreTab from "../pages/StoreTab";
 import Footer from "./Footer";
 import DashboardScreen from "../pages/DashboardScreen";
 import SmsApi from "../pages/SmsApi";
-import UnitsListTable from "../pages/UnitlistTable";
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -40,7 +39,6 @@ export default function Dashboard() {
     "/storetab": <StoreTab />,
     "/": <DashboardScreen />,
     "/smsapi": <SmsApi />,
-    // "/unitlist": <UnitList />,
   };
 
   const CurrentPage = routeComponents[location.pathname] || (
