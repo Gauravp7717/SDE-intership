@@ -1,7 +1,4 @@
-import React from "react";
 import { useLocation } from "react-router-dom";
-import { Shield } from "lucide-react";
-import Header from "../components/Header";
 
 export default function Home({ CurrentPage }) {
   const location = useLocation();

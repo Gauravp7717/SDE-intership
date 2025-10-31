@@ -4,7 +4,7 @@ import Header from "../components/Header";
 
 export default function AppLayout() {
   return (
-    <div className=" container mx-automin-h-screen flex flex-col">
+    <div className=" container mx-auto min-h-screen flex flex-col">
       {/* ✅ Navbar stays at the top */}
       <Header />
       <Navbar />

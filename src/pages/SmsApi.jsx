@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-export default function StoreTab() {
+export default function SmsApi() {
   const [activeTab, setActiveTab] = useState("sales");
 
   const tabs = [
-    { id: "store", label: "Store" },
+    { id: "store", label: "HTTP/URL SMS API" },
     { id: "system", label: "System" },
     { id: "sales", label: "Sales" },
     { id: "prefixes", label: "Prefixes" },

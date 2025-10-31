@@ -22,6 +22,8 @@ import TaxList from "../pages/TaxList";
 import ChangePass from "../pages/ChangePass";
 import StoreTab from "../pages/StoreTab";
 import Footer from "./Footer";
+import DashboardScreen from "../pages/DashboardScreen";
+import SmsApi from "../pages/SmsApi";
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -35,6 +37,8 @@ export default function Dashboard() {
     "/taxlist": <TaxList />,
     "/changepass": <ChangePass />,
     "/storetab": <StoreTab />,
+    "/": <DashboardScreen />,
+    "/smsapi": <SmsApi />,
   };
 
   const CurrentPage = routeComponents[location.pathname] || (
@@ -43,7 +47,7 @@ export default function Dashboard() {
 
   // ✅ Menu Items
   const menuItems = [
-    { name: "Dashboard", icon: LayoutDashboard, path: "/dashboard" },
+    { name: "Dashboard", icon: LayoutDashboard, path: "/" },
     { name: "Tenants", icon: Building2, path: "/tenants" },
     { name: "Plans", icon: CreditCard, path: "/plans" },
     { name: "Subscriptions", icon: RefreshCw, path: "/subscriptions" },

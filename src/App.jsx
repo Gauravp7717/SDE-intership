@@ -3,7 +3,6 @@ import AppLayout from "./applayout/Applayout";
 
 export default function App() {
   return (
-    
     <BrowserRouter>
       <Routes>
         {/* All app routes go inside AppLayout */}
