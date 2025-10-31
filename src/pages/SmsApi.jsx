@@ -2,13 +2,13 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function SmsApi() {
-  const [activeTab, setActiveTab] = useState("sales");
+  const [activeTab, setActiveTab] = useState("1");
 
   const tabs = [
-    { id: "store", label: "HTTP/URL SMS API" },
-    { id: "system", label: "System" },
-    { id: "sales", label: "Sales" },
-    { id: "prefixes", label: "Prefixes" },
+    { id: "1", label: "HTTP/URL SMS API" },
+    { id: "2", label: "Twillio SMS API" },
+    { id: "3", label: "FiveMojo Whatsapp API" },
+    { id: "4", label: "Action" },
   ];
 
   return (
@@ -52,10 +52,10 @@ export default function SmsApi() {
             transition={{ duration: 0.3 }}
             className="p-6 md:p-8"
           >
-            {activeTab === "store" && <StoreSection />}
-            {activeTab === "system" && <SystemSection />}
-            {activeTab === "sales" && <SalesSection />}
-            {activeTab === "prefixes" && <PrefixesSection />}
+            {activeTab === "1" && <StoreSection />}
+            {activeTab === "2" && <TwillioSMS />}
+            {activeTab === "3" && <FiveMojo />}
+            {activeTab === "4" && <PrefixesSection />}
           </motion.div>
         </AnimatePresence>
       </motion.div>
@@ -297,234 +297,164 @@ function StoreSection() {
 }
 
 /* --------------------- SYSTEM SECTION ---------------------- */
-function SystemSection() {
-  const [formData, setFormData] = useState({
-    timezone: "Asia/Kolkata",
-    language: "English",
-    dateFormat: "dd-mm-yyyy",
-    timeFormat: "12 Hours",
-    currency: "Indian Rupee INR (₹)",
-    currencySymbolPlacement: "Before Amount",
-    decimals: "2",
-    decimalsForQuantity: "2",
-    enableRoundOff: false,
-  });
-
-  // ✅ Handlers
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: type === "checkbox" ? checked : value,
-    }));
-  };
-
-  const handleUpdate = () => {
-    console.log("System configuration updated:", formData);
-    // You can later add API integration or saving logic here
-  };
-
-  const handleClose = () => {
-    console.log("System configuration closed!");
-    // You can connect this to modal/tab closing logic
-  };
-
+function TwillioSMS() {
   return (
-    <div>
-      <h2 className="text-xl font-semibold text-gray-800 border-b pb-2 mb-4">
-        System Configuration
-      </h2>
+    <motion.div
+      className="p-6 bg-white rounded-2xl   border-gray-100 max-w-2xl mx-auto mt-10 w-[90%] sm:w-[80%] md:w-[60%] lg:w-[50%]"
+      initial={{ opacity: 0, y: 40 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+    >
+      {/* Title */}
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <SelectField
-          label="Timezone"
-          name="timezone"
-          value={formData.timezone}
-          onChange={handleChange}
-          options={["Asia/Kolkata", "America/New_York", "Europe/London"]}
-        />
-        <SelectField
-          label="Language"
-          name="language"
-          value={formData.language}
-          onChange={handleChange}
-          options={["English", "Spanish", "French"]}
-        />
-        <SelectField
-          label="Date Format"
-          name="dateFormat"
-          value={formData.dateFormat}
-          onChange={handleChange}
-          options={["dd-mm-yyyy", "mm-dd-yyyy", "yyyy-mm-dd"]}
-        />
-        <SelectField
-          label="Time Format"
-          name="timeFormat"
-          value={formData.timeFormat}
-          onChange={handleChange}
-          options={["12 Hours", "24 Hours"]}
-        />
-        <SelectField
-          label="Currency"
-          name="currency"
-          value={formData.currency}
-          onChange={handleChange}
-          options={[
-            "Indian Rupee INR (₹)",
-            "US Dollar USD ($)",
-            "Euro EUR (€)",
-          ]}
-        />
-        <SelectField
-          label="Currency Symbol Placement"
-          name="currencySymbolPlacement"
-          value={formData.currencySymbolPlacement}
-          onChange={handleChange}
-          options={["Before Amount", "After Amount"]}
-        />
-        <SelectField
-          label="Decimals"
-          name="decimals"
-          value={formData.decimals}
-          onChange={handleChange}
-          options={["0", "1", "2", "3", "4"]}
-        />
-        <SelectField
-          label="Decimals for Quantity"
-          name="decimalsForQuantity"
-          value={formData.decimalsForQuantity}
-          onChange={handleChange}
-          options={["0", "1", "2", "3", "4"]}
-        />
-        <CheckboxField
-          label="Enable Round Off"
-          name="enableRoundOff"
-          checked={formData.enableRoundOff}
-          onChange={handleChange}
-        />
+      {/* Form */}
+      <div className="space-y-5">
+        {/* Old Password */}
+        <motion.div
+          initial={{ opacity: 0, x: -30 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.3 }}
+        >
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            Account SID <span className="text-red-500">*</span>
+          </label>
+          <input
+            type="password"
+            className="w-full sm:w-3/4 px-4 py-2 border border-gray-300 rounded-lg 
+            focus:ring-2 focus:ring-sky-500 focus:border-transparent outline-none 
+            transition-all duration-200 shadow-sm hover:shadow-md"
+            placeholder="account sid"
+          />
+        </motion.div>
+
+        {/* New Password */}
+        <motion.div
+          initial={{ opacity: 0, x: 30 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.4 }}
+        >
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            Auth Token <span className="text-red-500">*</span>
+          </label>
+          <input
+            type="password"
+            className="w-full sm:w-3/4 px-4 py-2 border border-gray-300 rounded-lg 
+            focus:ring-2 focus:ring-sky-500 focus:border-transparent outline-none 
+            transition-all duration-200 shadow-sm hover:shadow-md"
+            placeholder="Auth Token"
+          />
+        </motion.div>
+
+        {/* Confirm New Password */}
+        <motion.div
+          initial={{ opacity: 0, x: -30 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.5 }}
+        >
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            Twillio Phone Number <span className="text-red-500">*</span>
+          </label>
+          <input
+            type="password"
+            className="w-full sm:w-3/4 px-4 py-2 border border-gray-300 rounded-lg 
+            focus:ring-2 focus:ring-sky-500 focus:border-transparent outline-none 
+            transition-all duration-200 shadow-sm hover:shadow-md"
+            placeholder="phone number"
+          />
+        </motion.div>
       </div>
 
-      {/* ✅ Buttons Section */}
-      <div className="mt-8 flex justify-center gap-4">
-        <button
-          onClick={handleUpdate}
-          className="px-8 py-2.5 bg-green-500 hover:bg-green-600 text-white font-medium rounded-md transition-colors"
-        >
-          Update
+      {/* Buttons */}
+      <motion.div
+        className="flex flex-col sm:flex-row sm:space-x-4 mt-8 justify-center space-y-3 sm:space-y-0"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.6 }}
+      >
+        <button className="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-transform transform hover:scale-105 duration-200 shadow-sm">
+          Save
         </button>
-        <button
-          onClick={handleClose}
-          className="px-8 py-2.5 bg-orange-500 hover:bg-orange-600 text-white font-medium rounded-md transition-colors"
-        >
+        <button className="px-6 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-transform transform hover:scale-105 duration-200 shadow-sm">
           Close
         </button>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }
 
 /* --------------------- SALES SECTION ---------------------- */
-function SalesSection() {
-  const [showMRP, setShowMRP] = useState(false);
-  const [showPaidAmount, setShowPaidAmount] = useState(true);
-  const [showPrevBalance, setShowPrevBalance] = useState(true);
-  const [showTermsInvoice, setShowTermsInvoice] = useState(true);
-  const [showTermsPOS, setShowTermsPOS] = useState(true);
-
-  // ✅ Handlers for buttons
-  const handleUpdate = () => {
-    console.log("Sales configuration updated successfully!");
-    // You can later connect this with form data saving logic
-  };
-
-  const handleClose = () => {
-    console.log("Sales configuration form closed!");
-    // You can later connect this to modal/tab closing logic
-  };
-
+function FiveMojo() {
   return (
-    <SectionWrapper title="Sales Configuration">
-      <FormField label="Default Account">
-        <Select options={["-None-", "Account 1", "Account 2"]} />
-      </FormField>
+    <motion.div
+      className="p-6 bg-white rounded-2xl  border-gray-100 max-w-2xl mx-auto mt-10 w-[90%] sm:w-[80%] md:w-[60%] lg:w-[50%]"
+      initial={{ opacity: 0, y: 40 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+    >
+      {/* Title */}
+      {/* <motion.h2
+        className="text-xl font-bold mb-6 text-gray-800 text-center"
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2 }}
+      >
+        Add / Update Records
+      </motion.h2> */}
 
-      <FormField label="Default Sales Discount (%)">
-        <Input type="number" defaultValue="0.000" step="0.001" />
-      </FormField>
-
-      <FormField label="Sales Invoice Format*">
-        <Select
-          options={["GST Format", "Standard Format", "Detailed Format"]}
-        />
-      </FormField>
-
-      <FormField label="POS Invoice Format*">
-        <Select options={["GST Format", "Standard Format", "Compact Format"]} />
-      </FormField>
-
-      <CheckboxField
-        label="Show MRP Column on POS Invoice"
-        checked={showMRP}
-        onChange={setShowMRP}
-      />
-
-      <CheckboxField
-        label="Show Paid Amount and Change Return (in POS)"
-        checked={showPaidAmount}
-        onChange={setShowPaidAmount}
-      />
-
-      <CheckboxField
-        label="Show Previous Balance on Invoice"
-        checked={showPrevBalance}
-        onChange={setShowPrevBalance}
-      />
-
-      <FormField label="Number to Words Format*">
-        <Select
-          options={["Default", "Indian Format", "International Format"]}
-        />
-      </FormField>
-
-      <FormField label="Sales Invoice Footer Text">
-        <Textarea
-          rows="3"
-          defaultValue="This is footer text. It is in Store Management."
-        />
-      </FormField>
-
-      <FormField label="Invoice Terms and Conditions">
-        <div className="space-y-3">
-          <RadioGroup
-            label="Invoice"
-            checked={showTermsInvoice}
-            setChecked={setShowTermsInvoice}
-          />
-          <RadioGroup
-            label="POS Invoice"
-            checked={showTermsPOS}
-            setChecked={setShowTermsPOS}
-          />
-          <Textarea rows="3" placeholder="Place some text here" />
-        </div>
-      </FormField>
-
-      {/* ✅ Buttons Section */}
-      <div className="mt-8 flex justify-center gap-4">
-        <button
-          onClick={handleUpdate}
-          className="px-8 py-2.5 bg-green-500 hover:bg-green-600 text-white font-medium rounded-md transition-colors"
+      {/* Form Fields */}
+      <div className="space-y-5">
+        {/* Payment Type Name */}
+        <motion.div
+          initial={{ opacity: 0, x: -30 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.3 }}
         >
-          Update
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            Instance Token <span className="text-red-500">*</span>
+          </label>
+          <input
+            type="text"
+            className="w-full sm:w-3/4 px-4 py-2 border border-gray-300 rounded-lg 
+              focus:ring-2 focus:ring-sky-500 focus:border-transparent outline-none 
+              transition-all duration-200 shadow-sm hover:shadow-md"
+            placeholder="Enter payment type name"
+          />
+        </motion.div>
+
+        {/* Additional Field */}
+        <motion.div
+          initial={{ opacity: 0, x: 30 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.4 }}
+        >
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            Token
+          </label>
+          <input
+            type="text"
+            className="w-full sm:w-3/4 px-4 py-2 border border-gray-300 rounded-lg 
+              focus:ring-2 focus:ring-sky-500 focus:border-transparent outline-none 
+              transition-all duration-200 shadow-sm hover:shadow-md"
+            placeholder="Enter additional field"
+          />
+        </motion.div>
+      </div>
+
+      {/* Buttons */}
+      <motion.div
+        className="flex flex-col sm:flex-row sm:space-x-4 mt-8 justify-center space-y-3 sm:space-y-0"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.5 }}
+      >
+        <button className="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-transform transform hover:scale-105 duration-200 shadow-sm">
+          Save
         </button>
-        <button
-          onClick={handleClose}
-          className="px-8 py-2.5 bg-orange-500 hover:bg-orange-600 text-white font-medium rounded-md transition-colors"
-        >
+        <button className="px-6 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-transform transform hover:scale-105 duration-200 shadow-sm">
           Close
         </button>
-      </div>
-    </SectionWrapper>
+      </motion.div>
+    </motion.div>
   );
 }
 

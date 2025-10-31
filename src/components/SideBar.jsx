@@ -24,6 +24,7 @@ import StoreTab from "../pages/StoreTab";
 import Footer from "./Footer";
 import DashboardScreen from "../pages/DashboardScreen";
 import SmsApi from "../pages/SmsApi";
+import UnitsListTable from "../pages/UnitlistTable";
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -32,13 +33,14 @@ export default function Dashboard() {
 
   // ✅ Routes
   const routeComponents = {
-    "/unitlist": <UnitList />,
+    "/unitlisttable": <UnitsListTable />,
     "/paymenttype": <PaymentType />,
     "/taxlist": <TaxList />,
     "/changepass": <ChangePass />,
     "/storetab": <StoreTab />,
     "/": <DashboardScreen />,
     "/smsapi": <SmsApi />,
+    // "/unitlist": <UnitList />,
   };
 
   const CurrentPage = routeComponents[location.pathname] || (
@@ -58,7 +60,8 @@ export default function Dashboard() {
     { name: "Store", icon: Store, path: "/storetab" },
     { name: "SMS/WhatsApp API", icon: MessageSquare, path: "/smsapi" },
     { name: "Tax List", icon: Percent, path: "/taxlist" },
-    { name: "Units List", icon: List, path: "/unitlist" },
+    { name: "Units List", icon: List, path: "/unitlisttable" },
+    // { name: "Units List", icon: List, path: "/unitlist" },
     { name: "Payment Types", icon: CreditCard, path: "/paymenttype" },
     { name: "Change Password", icon: Lock, path: "/changepass" },
   ];

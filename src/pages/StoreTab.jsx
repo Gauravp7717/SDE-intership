@@ -2,13 +2,13 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function StoreTab() {
-  const [activeTab, setActiveTab] = useState("sales");
+  const [activeTab, setActiveTab] = useState("1");
 
   const tabs = [
-    { id: "store", label: "Store" },
-    { id: "system", label: "System" },
-    { id: "sales", label: "Sales" },
-    { id: "prefixes", label: "Prefixes" },
+    { id: "1", label: "Store" },
+    { id: "2", label: "System" },
+    { id: "3", label: "Sales" },
+    { id: "4", label: "Prefixes" },
   ];
 
   return (
@@ -52,10 +52,10 @@ export default function StoreTab() {
             transition={{ duration: 0.3 }}
             className="p-6 md:p-8"
           >
-            {activeTab === "store" && <StoreSection />}
-            {activeTab === "system" && <SystemSection />}
-            {activeTab === "sales" && <SalesSection />}
-            {activeTab === "prefixes" && <PrefixesSection />}
+            {activeTab === "1" && <StoreSection />}
+            {activeTab === "2" && <SystemSection />}
+            {activeTab === "3" && <SalesSection />}
+            {activeTab === "4" && <PrefixesSection />}
           </motion.div>
         </AnimatePresence>
       </motion.div>
