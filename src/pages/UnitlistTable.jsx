@@ -1,47 +1,134 @@
 import React, { useState } from "react";
-import { Search, ChevronDown } from "lucide-react";
+import { ChevronDown } from "lucide-react";
+import { motion } from "framer-motion";
 
-export default function UnitsListTable() {
+export default function UnitsPage() {
+  const [showNewUnitForm, setShowNewUnitForm] = useState(false);
+  const [unitName, setUnitName] = useState("");
+  const [description, setDescription] = useState("");
+
+  // Example Data (replace with your API or state)
   const [entriesPerPage, setEntriesPerPage] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
-
-  const allUnits = [
-    { id: 1, name: "GM", description: "", status: "Active" },
-    { id: 2, name: "400g", description: "", status: "Active" },
-    { id: 3, name: "KILO", description: "", status: "Active" },
-    { id: 4, name: "330ml", description: "", status: "Active" },
-    { id: 5, name: "330", description: "", status: "Active" },
-    { id: 6, name: "312G", description: "", status: "Active" },
-    { id: 7, name: "200ml", description: "", status: "Active" },
-    { id: 8, name: "45g", description: "", status: "Active" },
-    { id: 9, name: "100ml", description: "", status: "Active" },
-    { id: 10, name: "230ml", description: "", status: "Active" },
-    ...Array.from({ length: 46 }, (_, i) => ({
-      id: 11 + i,
-      name: `Unit ${11 + i}`,
-      description: "",
-      status: "Active",
-    })),
+  const units = [
+    { id: 1, name: "Kg", description: "Kilogram", status: "Active" },
+    { id: 2, name: "L", description: "Litre", status: "Active" },
   ];
 
-  const filteredUnits = allUnits.filter((unit) =>
-    unit.name.toLowerCase().includes(searchTerm.toLowerCase())
+  // Filtered + Pagination logic
+  const filteredUnits = units.filter((u) =>
+    u.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
-
   const totalPages = Math.ceil(filteredUnits.length / entriesPerPage);
   const startIndex = (currentPage - 1) * entriesPerPage;
   const endIndex = startIndex + entriesPerPage;
   const currentUnits = filteredUnits.slice(startIndex, endIndex);
 
   const getPaginationButtons = () => {
-    const buttons = [];
-    for (let i = 1; i <= Math.min(6, totalPages); i++) {
-      buttons.push(i);
-    }
-    return buttons;
+    return Array.from({ length: totalPages }, (_, i) => i + 1);
   };
 
+  // Handlers
+  const handleNewButton = () => setShowNewUnitForm(true);
+
+  const handleSave = () => {
+    console.log("Saving unit:", { unitName, description });
+  };
+
+  const handleClose = () => {
+    console.log("Closing form");
+    setUnitName("");
+    setDescription("");
+    setShowNewUnitForm(false); // 🔹 Hide form and show list again
+  };
+
+  // ✅ Conditional Rendering
+  if (showNewUnitForm) {
+    return (
+      <div className="min-h-screen bg-gray-50">
+        <motion.div
+          className="p-6 bg-white rounded-2xl shadow-lg border border-gray-100 max-w-2xl mx-auto mt-10 w-[90%] sm:w-[80%] md:w-[60%] lg:w-[50%]"
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
+          <motion.h2
+            className="text-xl font-bold mb-6 text-gray-800 text-center"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+          >
+            Add / Update Unit
+          </motion.h2>
+
+          <div className="space-y-5">
+            {/* Unit Name Field */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.3 }}
+            >
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Unit Name <span className="text-red-500">*</span>
+              </label>
+              <input
+                type="text"
+                value={unitName}
+                onChange={(e) => setUnitName(e.target.value)}
+                className="w-full sm:w-3/4 px-4 py-2 border border-gray-300 rounded-lg 
+                focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none 
+                transition-all duration-200 shadow-sm hover:shadow-md"
+                placeholder="Enter unit name"
+              />
+            </motion.div>
+
+            {/* Description Field */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.4 }}
+            >
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Description
+              </label>
+              <textarea
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                rows="4"
+                className="w-full sm:w-3/4 px-4 py-2 border border-gray-300 rounded-lg 
+                focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none 
+                transition-all duration-200 shadow-sm hover:shadow-md resize-none"
+                placeholder="Enter description"
+              />
+            </motion.div>
+          </div>
+
+          <motion.div
+            className="flex flex-col sm:flex-row sm:space-x-4 mt-8 justify-center space-y-3 sm:space-y-0"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5 }}
+          >
+            <button
+              onClick={handleSave}
+              className="px-6 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition-transform transform hover:scale-105 duration-200 shadow-sm"
+            >
+              Save
+            </button>
+            <button
+              onClick={handleClose}
+              className="px-6 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-transform transform hover:scale-105 duration-200 shadow-sm"
+            >
+              Close
+            </button>
+          </motion.div>
+        </motion.div>
+      </div>
+    );
+  }
+
+  // ✅ Default View (Units List)
   return (
     <div className="p-6 bg-gray-50 min-h-screen">
       <div className="bg-white rounded-lg shadow">
@@ -49,7 +136,9 @@ export default function UnitsListTable() {
         <div className="flex justify-between items-center p-4 border-b">
           <h1 className="text-xl font-semibold text-gray-800">Units List</h1>
           <button
-           className="bg-white border border-gray-300 text-gray-700 px-4 py-2 rounded hover:bg-gray-50 flex items-center gap-2">
+            onClick={handleNewButton}
+            className="bg-white border border-gray-300 text-gray-700 px-4 py-2 rounded hover:bg-gray-50 flex items-center gap-2"
+          >
             + New Unit
           </button>
         </div>
@@ -75,24 +164,6 @@ export default function UnitsListTable() {
           </div>
 
           <div className="flex gap-2">
-            <button className="bg-cyan-400 text-white px-4 py-2 rounded hover:bg-cyan-500">
-              Copy
-            </button>
-            <button className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
-              Excel
-            </button>
-            <button className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
-              PDF
-            </button>
-            <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-              Print
-            </button>
-            <button className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">
-              CSV
-            </button>
-            <button className="bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600">
-              Columns
-            </button>
             <div className="relative">
               <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">
                 Search:

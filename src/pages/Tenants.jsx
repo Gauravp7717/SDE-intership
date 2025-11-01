@@ -38,7 +38,10 @@ const Tenants = () => {
       {view === "create" && (
         <div className="bg-white p-6 rounded-lg shadow">
           <h2 className="text-xl font-semibold border-b pb-2 mb-4">
-            Create Tenant <span className="text-gray-500 text-sm">Enter Tenant Information</span>
+            Create Tenant{" "}
+            <span className="text-gray-500 text-sm">
+              Enter Tenant Information
+            </span>
           </h2>
 
           <div className="space-y-4">
@@ -109,7 +112,8 @@ const Tenants = () => {
         <div className="bg-white p-6 rounded-lg shadow">
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-xl font-semibold">
-              Tenants List <span className="text-gray-500 text-sm">Add/Update Tenants</span>
+              Tenants List{" "}
+              <span className="text-gray-500 text-sm">Add/Update Tenants</span>
             </h2>
             <button
               onClick={() => setView("create")}

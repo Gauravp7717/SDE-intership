@@ -3,10 +3,42 @@ import React, { useState } from "react";
 const PlansSection = () => {
   const [view, setView] = useState("create");
   const [plans, setPlans] = useState([
-    { id: 1, name: "Gold", price: 2800, maxUsers: 20, duration: "Monthly", createdDate: "01-10-2025", status: "Active" },
-    { id: 2, name: "Diamond", price: 1500, maxUsers: 15, duration: "Monthly", createdDate: "11-09-2025", status: "Active" },
-    { id: 3, name: "Silver", price: 1000, maxUsers: 10, duration: "Monthly", createdDate: "11-09-2025", status: "Active" },
-    { id: 4, name: "Basic", price: 500, maxUsers: 3, duration: "Monthly", createdDate: "11-09-2025", status: "Active" },
+    {
+      id: 1,
+      name: "Gold",
+      price: 2800,
+      maxUsers: 20,
+      duration: "Monthly",
+      createdDate: "01-10-2025",
+      status: "Active",
+    },
+    {
+      id: 2,
+      name: "Diamond",
+      price: 1500,
+      maxUsers: 15,
+      duration: "Monthly",
+      createdDate: "11-09-2025",
+      status: "Active",
+    },
+    {
+      id: 3,
+      name: "Silver",
+      price: 1000,
+      maxUsers: 10,
+      duration: "Monthly",
+      createdDate: "11-09-2025",
+      status: "Active",
+    },
+    {
+      id: 4,
+      name: "Basic",
+      price: 500,
+      maxUsers: 3,
+      duration: "Monthly",
+      createdDate: "11-09-2025",
+      status: "Active",
+    },
   ]);
 
   const [formData, setFormData] = useState({
@@ -45,38 +77,93 @@ const PlansSection = () => {
     <div className="p-6 bg-white rounded-lg shadow-md">
       {view === "create" ? (
         <>
-          <h2 className="text-2xl font-semibold mb-4 border-b pb-2">Create Plan <span className="text-gray-500 text-sm">Enter Plan Information</span></h2>
+          <h2 className="text-2xl font-semibold mb-4 border-b pb-2">
+            Create Plan{" "}
+            <span className="text-gray-500 text-sm">
+              Enter Plan Information
+            </span>
+          </h2>
           <form onSubmit={handleSave} className="space-y-4">
             <div>
-              <label className="block font-medium">Plan Name<span className="text-red-500">*</span></label>
-              <input type="text" name="name" value={formData.name} onChange={handleChange} className="border rounded w-full p-2" />
+              <label className="block font-medium">
+                Plan Name<span className="text-red-500">*</span>
+              </label>
+              <input
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                className="border rounded w-full p-2"
+              />
             </div>
             <div>
-              <label className="block font-medium">Price<span className="text-red-500">*</span></label>
-              <input type="number" name="price" value={formData.price} onChange={handleChange} className="border rounded w-full p-2" />
+              <label className="block font-medium">
+                Price<span className="text-red-500">*</span>
+              </label>
+              <input
+                type="number"
+                name="price"
+                value={formData.price}
+                onChange={handleChange}
+                className="border rounded w-full p-2"
+              />
             </div>
             <div>
-              <label className="block font-medium">Max Users<span className="text-red-500">*</span></label>
-              <input type="number" name="maxUsers" value={formData.maxUsers} onChange={handleChange} className="border rounded w-full p-2" />
+              <label className="block font-medium">
+                Max Users<span className="text-red-500">*</span>
+              </label>
+              <input
+                type="number"
+                name="maxUsers"
+                value={formData.maxUsers}
+                onChange={handleChange}
+                className="border rounded w-full p-2"
+              />
             </div>
             <div>
-              <label className="block font-medium">Duration<span className="text-red-500">*</span></label>
-              <select name="duration" value={formData.duration} onChange={handleChange} className="border rounded w-full p-2">
+              <label className="block font-medium">
+                Duration<span className="text-red-500">*</span>
+              </label>
+              <select
+                name="duration"
+                value={formData.duration}
+                onChange={handleChange}
+                className="border rounded w-full p-2"
+              >
                 <option value="Monthly">Monthly</option>
                 <option value="Yearly">Yearly</option>
               </select>
             </div>
             <div className="flex gap-4 mt-6">
-              <button type="submit" className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Save</button>
-              <button type="button" onClick={() => setView("list")} className="bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600">Close</button>
+              <button
+                type="submit"
+                className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+              >
+                Save
+              </button>
+              <button
+                type="button"
+                onClick={() => setView("list")}
+                className="bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600"
+              >
+                Close
+              </button>
             </div>
           </form>
         </>
       ) : (
         <>
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-2xl font-semibold">Plans List <span className="text-gray-500 text-sm">Add/Update Plan</span></h2>
-            <button onClick={() => setView("create")} className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">+ Create Plan</button>
+            <h2 className="text-2xl font-semibold">
+              Plans List{" "}
+              <span className="text-gray-500 text-sm">Add/Update Plan</span>
+            </h2>
+            <button
+              onClick={() => setView("create")}
+              className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+            >
+              + Create Plan
+            </button>
           </div>
           <div className="overflow-x-auto">
             <table className="min-w-full border border-gray-200">
@@ -97,15 +184,21 @@ const PlansSection = () => {
                   <tr key={plan.id} className="text-center">
                     <td className="border px-4 py-2">{index + 1}</td>
                     <td className="border px-4 py-2">{plan.name}</td>
-                    <td className="border px-4 py-2">{plan.price.toFixed(2)}</td>
+                    <td className="border px-4 py-2">
+                      {plan.price.toFixed(2)}
+                    </td>
                     <td className="border px-4 py-2">{plan.maxUsers}</td>
                     <td className="border px-4 py-2">{plan.duration}</td>
                     <td className="border px-4 py-2">{plan.createdDate}</td>
                     <td className="border px-4 py-2">
-                      <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm">{plan.status}</span>
+                      <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm">
+                        {plan.status}
+                      </span>
                     </td>
                     <td className="border px-4 py-2">
-                      <button className="bg-blue-500 text-white px-3 py-1 rounded">Action</button>
+                      <button className="bg-blue-500 text-white px-3 py-1 rounded">
+                        Action
+                      </button>
                     </td>
                   </tr>
                 ))}

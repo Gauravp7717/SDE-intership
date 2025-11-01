@@ -127,7 +127,7 @@ const UsersSection = () => {
 
             {/* Right Side - Profile Picture */}
             <div className="flex flex-col items-center w-64 border-l border-gray-200 pl-4">
-              <label className="text-gray-800 font-semibold mb-2">
+              <label className="text-gray-800 font-semibold mb-2 ">
                 Profile Picture
               </label>
               <input
@@ -135,7 +135,7 @@ const UsersSection = () => {
                 accept="image/*"
                 name="profilePic"
                 onChange={handleChange}
-                className="mb-2"    
+                className="mb-2 border shadow-lg rounded w-full cursor-pointer"
               />
               <p className="text-xs text-red-500 text-center mb-2">
                 Max Width/Height: 500px × 500px & Size: 500Kb

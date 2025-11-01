@@ -24,6 +24,12 @@ import StoreTab from "../pages/StoreTab";
 import Footer from "./Footer";
 import DashboardScreen from "../pages/DashboardScreen";
 import SmsApi from "../pages/SmsApi";
+import UnitsListTable from "../pages/UnitlistTable";
+import Tenants from "../pages/Tenants";
+import PlansSection from "../pages/PlansSection";
+import SubscriptionSection from "../pages/SubscriptionsSection";
+import UsersSection from "../pages/UsersSection";
+import { nav } from "framer-motion/client";
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -39,6 +45,10 @@ export default function Dashboard() {
     "/storetab": <StoreTab />,
     "/": <DashboardScreen />,
     "/smsapi": <SmsApi />,
+    "/tenants": <Tenants />,
+    "/plans": <PlansSection />,
+    "/subscriptions": <SubscriptionSection />,
+    "/users": <UsersSection />,
   };
 
   const CurrentPage = routeComponents[location.pathname] || (
@@ -59,10 +69,15 @@ export default function Dashboard() {
     { name: "SMS/WhatsApp API", icon: MessageSquare, path: "/smsapi" },
     { name: "Tax List", icon: Percent, path: "/taxlist" },
     { name: "Units List", icon: List, path: "/unitlisttable" },
-    // { name: "Units List", icon: List, path: "/unitlist" },
+
     { name: "Payment Types", icon: CreditCard, path: "/paymenttype" },
     { name: "Change Password", icon: Lock, path: "/changepass" },
   ];
+
+  const handelDropdownClick = (path) => {
+    if (settingsOpen) setSettingsOpen(false);
+    navigate(path);
+  };
 
   return (
     <div className="flex h-screen bg-gray-50 overflow-hidden">
@@ -74,11 +89,11 @@ export default function Dashboard() {
         className="w-64 bg-white shadow-lg flex flex-col border-r border-gray-200"
       >
         {/* Navigation */}
-        <nav className="flex-1 overflow-y-auto py-4">
+        <nav className="flex-1 overflow-y-auto font-bold py-4">
           {menuItems.map((item) => (
             <button
               key={item.name}
-              onClick={() => navigate(item.path)}
+              onClick={() => handelDropdownClick(item.path)}
               className={`w-full flex items-center space-x-3 px-6 py-3 text-sm transition-all duration-200 rounded-r-full ${
                 location.pathname === item.path
                   ? "bg-sky-100 text-sky-600 font-semibold border-r-4 border-sky-600"
