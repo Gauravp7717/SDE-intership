@@ -16,13 +16,13 @@ export default function StoreTab() {
       initial={{ opacity: 0, y: 15 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4 }}
-      className="w-full max-w-6xl mx-auto p-6 bg-gray-50 min-h-screen"
+      className="w-full max-w-6xl mx-auto p-6 min-h-screen"
     >
       <motion.div
         initial={{ scale: 0.98, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.3 }}
-        className="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden"
+        className="bg-white  border-gray-200 overflow-hidden"
       >
         {/* ✅ Tab Navigation */}
         <div className="flex flex-wrap border-b border-gray-200 bg-gray-50/50">

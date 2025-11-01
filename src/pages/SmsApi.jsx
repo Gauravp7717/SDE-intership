@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Plus, Trash2 } from "lucide-react";
 
 export default function SmsApi() {
   const [activeTab, setActiveTab] = useState("1");
@@ -16,13 +17,13 @@ export default function SmsApi() {
       initial={{ opacity: 0, y: 15 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4 }}
-      className="w-full max-w-6xl mx-auto p-6 bg-gray-50 min-h-screen"
+      className="w-full max-w-6xl mx-auto p-6 min-h-screen"
     >
       <motion.div
         initial={{ scale: 0.98, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.3 }}
-        className="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden"
+        className="bg-white  border-gray-200 overflow-hidden"
       >
         {/* ✅ Tab Navigation */}
         <div className="flex flex-wrap border-b border-gray-200 bg-gray-50/50">
@@ -52,10 +53,10 @@ export default function SmsApi() {
             transition={{ duration: 0.3 }}
             className="p-6 md:p-8"
           >
-            {activeTab === "1" && <StoreSection />}
+            {activeTab === "1" && <KeyValueForm />}
             {activeTab === "2" && <TwillioSMS />}
             {activeTab === "3" && <FiveMojo />}
-            {activeTab === "4" && <PrefixesSection />}
+            {activeTab === "4" && <Action />}
           </motion.div>
         </AnimatePresence>
       </motion.div>
@@ -63,240 +64,186 @@ export default function SmsApi() {
   );
 }
 
-/* --------------------- STORE SECTION ---------------------- */
-function StoreSection() {
-  const [formData, setFormData] = useState({
-    storeCode: "ST0002",
-    storeName: "Impera Store",
-    mobile: "9784512413",
-    email: "imperastore@gmail.com",
-    phone: "",
-    gstNumber: "",
-    taxNumber: "",
-    panNumber: "",
-    storeWebsite: "",
-    showSignature: false,
-    country: "India",
-    state: "Maharashtra",
-    city: "Pune",
-    postcode: "",
-    address: "Kharadi, Pune",
-    bankDetails: "",
-  });
+/* --------------------- HTTPS SECTION ---------------------- */
+function KeyValueForm() {
+  const [entries, setEntries] = useState([
+    {
+      id: 1,
+      key: "weblink",
+      value: "http://example.com/sendmessage",
+      label: "URL*",
+    },
+    { id: 2, key: "mobiles", value: "", label: "Mobile Key*" },
+    { id: 3, key: "message", value: "", label: "Message Key*" },
+  ]);
 
-  const [storeLogo, setStoreLogo] = useState(null);
-  const [signature, setSignature] = useState(null);
-
-  const handleInputChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: type === "checkbox" ? checked : value,
-    }));
+  const handleAddEntry = () => {
+    const newEntry = {
+      id: Date.now(),
+      key: "",
+      value: "",
+      label: "New Key",
+    };
+    setEntries([...entries, newEntry]);
   };
 
-  const handleFileChange = (e, type) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        if (type === "logo") setStoreLogo(reader.result);
-        else setSignature(reader.result);
-      };
-      reader.readAsDataURL(file);
-    }
+  const handleRemoveEntry = (id) => {
+    setEntries(entries.filter((entry) => entry.id !== id));
+  };
+
+  const handleKeyChange = (id, newKey) => {
+    setEntries(
+      entries.map((entry) =>
+        entry.id === id ? { ...entry, key: newKey } : entry
+      )
+    );
+  };
+
+  const handleValueChange = (id, newValue) => {
+    setEntries(
+      entries.map((entry) =>
+        entry.id === id ? { ...entry, value: newValue } : entry
+      )
+    );
   };
 
   const handleUpdate = () => {
-    console.log("Updated Store Data:", formData);
-    console.log("Store Logo:", storeLogo);
-    console.log("Signature:", signature);
-    alert("✅ Store details updated successfully!");
+    console.log("Updating entries:", entries);
   };
 
-  const handleClose = () => alert("⚠️ Form closed!");
+  const handleClose = () => {
+    console.log("Closing form");
+  };
 
   return (
-    <div className="p-4">
-      <h2 className="text-xl font-semibold text-gray-800 border-b pb-2 mb-4">
-        Store Configuration
-      </h2>
-
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        {/* Left Column */}
-        <div className="space-y-4">
-          <InputField
-            label="Store Code"
-            required
-            name="storeCode"
-            value={formData.storeCode}
-            onChange={handleInputChange}
-          />
-          <InputField
-            label="Store Name"
-            required
-            name="storeName"
-            value={formData.storeName}
-            onChange={handleInputChange}
-          />
-          <InputField
-            label="Mobile"
-            required
-            name="mobile"
-            value={formData.mobile}
-            onChange={handleInputChange}
-          />
-          <InputField
-            label="Email"
-            required
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleInputChange}
-          />
-          <InputField
-            label="Phone"
-            name="phone"
-            value={formData.phone}
-            onChange={handleInputChange}
-          />
-          <InputField
-            label="GST Number"
-            name="gstNumber"
-            value={formData.gstNumber}
-            onChange={handleInputChange}
-          />
-          <InputField
-            label="Tax Number"
-            name="taxNumber"
-            value={formData.taxNumber}
-            onChange={handleInputChange}
-          />
-          <InputField
-            label="PAN Number"
-            name="panNumber"
-            value={formData.panNumber}
-            onChange={handleInputChange}
-          />
-          <InputField
-            label="Store Website"
-            name="storeWebsite"
-            value={formData.storeWebsite}
-            onChange={handleInputChange}
-          />
-          <CheckboxField
-            label="Show Signature on Invoice"
-            name="showSignature"
-            checked={formData.showSignature}
-            onChange={handleInputChange}
-          />
-          <FileUpload
-            label="Signature"
-            onChange={(e) => handleFileChange(e, "signature")}
-          />
+    <div className="min-h-screen py-10">
+      <motion.div
+        className="p-6 bg-white rounded-2xl  border-gray-100 max-w-4xl mx-auto w-[95%] sm:w-[90%] md:w-[85%]"
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+      >
+        {/* Header with Add Button */}
+        <div className="flex justify-between items-center mb-6">
+          <motion.h2
+            className="text-xl font-bold text-gray-800"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.2 }}
+          >
+            Configuration Settings
+          </motion.h2>
+          <motion.button
+            onClick={handleAddEntry}
+            className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-transform transform hover:scale-105 duration-200 shadow-sm"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.2 }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <Plus size={18} />
+            <span className="hidden sm:inline">Add</span>
+          </motion.button>
         </div>
 
-        {/* Right Column */}
-        <div className="space-y-4">
-          <TextAreaField
-            label="Bank Details"
-            name="bankDetails"
-            value={formData.bankDetails}
-            onChange={handleInputChange}
-          />
-          <SelectField
-            label="Country"
-            name="country"
-            value={formData.country}
-            onChange={handleInputChange}
-            options={["India", "USA", "UK"]}
-          />
-          <SelectField
-            label="State"
-            name="state"
-            value={formData.state}
-            onChange={handleInputChange}
-            options={["Maharashtra", "Karnataka", "Delhi"]}
-          />
-          <InputField
-            label="City"
-            required
-            name="city"
-            value={formData.city}
-            onChange={handleInputChange}
-          />
-          <InputField
-            label="Postcode"
-            name="postcode"
-            value={formData.postcode}
-            onChange={handleInputChange}
-          />
-          <TextAreaField
-            label="Address"
-            required
-            name="address"
-            value={formData.address}
-            onChange={handleInputChange}
-          />
-          <FileUpload
-            label="Store Logo"
-            onChange={(e) => handleFileChange(e, "logo")}
-          />
-
-          {storeLogo && (
-            <div className="mt-3 p-4 border border-gray-200 rounded-md bg-gray-50">
-              <img
-                src={storeLogo}
-                alt="Store Logo"
-                className="max-h-32 object-contain mx-auto"
-              />
-            </div>
-          )}
-        </div>
-      </div>
-
-      {/* Signature Preview */}
-      <div className="mt-8 border-t pt-6">
-        <h3 className="text-lg font-medium text-gray-700 text-center mb-3">
-          Signature Preview
-        </h3>
-        <div className="flex justify-center">
-          <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 bg-gray-50 w-full max-w-md">
-            {signature ? (
-              <img
-                src={signature}
-                alt="Signature"
-                className="max-h-48 mx-auto object-contain"
-              />
-            ) : (
-              <p className="text-center text-gray-500 text-sm">
-                No Image Available
-              </p>
-            )}
+        {/* Table Header */}
+        <motion.div
+          className="grid grid-cols-12 gap-3 mb-3 px-2"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.3 }}
+        >
+          <div className="col-span-3 text-sm font-semibold text-gray-700">
+            Key
           </div>
-        </div>
-      </div>
+          <div className="col-span-8 text-sm font-semibold text-gray-700">
+            Key Value
+          </div>
+          <div className="col-span-1 text-sm font-semibold text-gray-700 text-center">
+            Action
+          </div>
+        </motion.div>
 
-      {/* Action Buttons */}
-      <div className="mt-8 flex justify-center gap-4">
-        <button
-          onClick={handleUpdate}
-          className="px-8 py-2.5 bg-green-500 hover:bg-green-600 text-white font-medium rounded-md transition-colors"
+        {/* Entries */}
+        <div className="space-y-3">
+          {entries.map((entry, index) => (
+            <motion.div
+              key={entry.id}
+              className="grid grid-cols-12 gap-3 items-center"
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.4 + index * 0.1 }}
+            >
+              {/* Label and Key Input */}
+              <div className="col-span-3">
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  {entry.label}
+                </label>
+                <input
+                  type="text"
+                  value={entry.key}
+                  onChange={(e) => handleKeyChange(entry.id, e.target.value)}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg 
+                  focus:ring-2 focus:ring-sky-500 focus:border-transparent outline-none 
+                  transition-all duration-200 shadow-sm hover:shadow-md text-sm bg-gray-50"
+                  placeholder="Enter key"
+                />
+              </div>
+
+              {/* Value Input */}
+              <div className="col-span-8">
+                <input
+                  type="text"
+                  value={entry.value}
+                  onChange={(e) => handleValueChange(entry.id, e.target.value)}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg 
+                  focus:ring-2 focus:ring-sky-500 focus:border-transparent outline-none 
+                  transition-all duration-200 shadow-sm hover:shadow-md text-sm mt-6"
+                  placeholder="Enter value"
+                />
+              </div>
+
+              {/* Delete Button */}
+              <div className="col-span-1 flex justify-center mt-6">
+                <motion.button
+                  onClick={() => handleRemoveEntry(entry.id)}
+                  className="p-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-transform transform hover:scale-110 duration-200 shadow-sm"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  <Trash2 size={16} />
+                </motion.button>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Action Buttons */}
+        <motion.div
+          className="flex flex-col sm:flex-row gap-4 mt-8 justify-center"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6 }}
         >
-          Update
-        </button>
-        <button
-          onClick={handleClose}
-          className="px-8 py-2.5 bg-orange-500 hover:bg-orange-600 text-white font-medium rounded-md transition-colors"
-        >
-          Close
-        </button>
-      </div>
+          <button
+            onClick={handleUpdate}
+            className="px-8 py-2.5 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-transform transform hover:scale-105 duration-200 shadow-sm font-medium"
+          >
+            Update
+          </button>
+          <button
+            onClick={handleClose}
+            className="px-8 py-2.5 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-transform transform hover:scale-105 duration-200 shadow-sm font-medium"
+          >
+            Close
+          </button>
+        </motion.div>
+      </motion.div>
     </div>
   );
 }
-
-/* --------------------- SYSTEM SECTION ---------------------- */
+/* --------------------- TWILLOW SMS SECTION ---------------------- */
 function TwillioSMS() {
   return (
     <motion.div
@@ -382,7 +329,7 @@ function TwillioSMS() {
   );
 }
 
-/* --------------------- SALES SECTION ---------------------- */
+/* --------------------- FIVE MOJO SECTION ---------------------- */
 function FiveMojo() {
   return (
     <motion.div
@@ -458,95 +405,53 @@ function FiveMojo() {
   );
 }
 
-/* --------------------- PREFIXES SECTION ---------------------- */
-function PrefixesSection() {
+/* --------------------- ACTION SECTION ---------------------- */
+function Action() {
+  const [formData, setFormData] = useState({
+    country: "India",
+  });
+
+  const handleInputChange = (e) => {
+    setFormData({ ...formData, country: e.target.value });
+  };
+
   const handleUpdate = () => {
-    console.log("Sales configuration updated successfully!");
-    // You can later connect this with form data saving logic
+    console.log("Updated country:", formData.country);
+    // You can later connect this with saving logic
   };
 
   const handleClose = () => {
-    console.log("Sales configuration form closed!");
-    // You can later connect this to modal/tab closing logic
+    console.log("Form closed!");
+    // Add modal/tab closing logic later
   };
 
   return (
-    <SectionWrapper title="Prefixes Configuration">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="space-y-4">
-          <FormField label="Category">
-            <Input placeholder="e.g., INV-" />
-          </FormField>
-          <FormField label="Supplier">
-            <Input placeholder="e.g., POS-" />
-          </FormField>
-          <FormField label="Phase Return">
-            <Input placeholder="e.g., ORD-" />
-          </FormField>
-          <FormField label="Sales">
-            <Input placeholder="e.g., QT-" />
-          </FormField>
-          <FormField label="Expense">
-            <Input placeholder="e.g., INV-" />
-          </FormField>
-          <FormField label="Quotation">
-            <Input placeholder="e.g., POS-" />
-          </FormField>
-          <FormField label="Sales Payment">
-            <Input placeholder="e.g., ORD-" />
-          </FormField>
-          <FormField label="Purchase Payment">
-            <Input placeholder="e.g., QT-" />
-          </FormField>
-          <FormField label="Expense Payment">
-            <Input placeholder="e.g., INV-" />
-          </FormField>
-        </div>
+    <SectionWrapper title="">
+      {/* ✅ Country Dropdown */}
+      <div className="max-w-md mx-auto space-y-6 mt-6">
+        <SelectField
+          label="SmS Status"
+          name="country"
+          value={formData.country}
+          onChange={handleInputChange}
+          options={["India", "USA", "UK"]}
+        />
 
-        <div className="space-y-4">
-          <FormField label="Item">
-            <Input placeholder="e.g., ORD-" />
-          </FormField>
-          <FormField label="Purchase">
-            <Input placeholder="e.g., QT-" />
-          </FormField>
-          <FormField label="Customer">
-            <Input placeholder="e.g., INV-" />
-          </FormField>
-          <FormField label="Sales Return">
-            <Input placeholder="e.g., POS-" />
-          </FormField>
-          <FormField label="Account">
-            <Input placeholder="e.g., ORD-" />
-          </FormField>
-          <FormField label="Money Transfer">
-            <Input placeholder="e.g., QT-" />
-          </FormField>
-          <FormField label="Sales Return payment">
-            <Input placeholder="e.g., INV-" />
-          </FormField>
-          <FormField label="Purchase Return payment">
-            <Input placeholder="e.g., POS-" />
-          </FormField>
-          <FormField label="Customer Advanced Payment">
-            <Input placeholder="e.g., ORD-" />
-          </FormField>
+        {/* ✅ Buttons */}
+        <div className="flex justify-center gap-4 mt-8">
+          <button
+            onClick={handleUpdate}
+            className="px-8 py-2.5 bg-green-500 hover:bg-green-600 text-white font-medium rounded-md transition-colors"
+          >
+            Update
+          </button>
+          <button
+            onClick={handleClose}
+            className="px-8 py-2.5 bg-orange-500 hover:bg-orange-600 text-white font-medium rounded-md transition-colors"
+          >
+            Close
+          </button>
         </div>
-      </div>
-      {/* ✅ Buttons Section */}
-      <div className="mt-8 flex justify-center gap-4">
-        <button
-          onClick={handleUpdate}
-          className="px-8 py-2.5 bg-green-500 hover:bg-green-600 text-white font-medium rounded-md transition-colors"
-        >
-          Update
-        </button>
-        <button
-          onClick={handleClose}
-          className="px-8 py-2.5 bg-orange-500 hover:bg-orange-600 text-white font-medium rounded-md transition-colors"
-        >
-          Close
-        </button>
       </div>
     </SectionWrapper>
   );
@@ -618,31 +523,6 @@ const CheckboxField = ({ label, name, checked, onChange }) => (
       <span className="text-sm text-gray-700">Enable</span>
     </label>
   </FormField>
-);
-
-const RadioGroup = ({ label, checked, setChecked }) => (
-  <div className="flex items-center space-x-4">
-    <label className="flex items-center space-x-2">
-      <input
-        type="radio"
-        name={`terms-${label}`}
-        checked={checked}
-        onChange={() => setChecked(true)}
-        className="w-4 h-4 accent-sky-500"
-      />
-      <span className="text-sm text-gray-700">Show on {label}</span>
-    </label>
-    <label className="flex items-center space-x-2">
-      <input
-        type="radio"
-        name={`terms-${label}`}
-        checked={!checked}
-        onChange={() => setChecked(false)}
-        className="w-4 h-4 accent-sky-500"
-      />
-      <span className="text-sm text-gray-700">Hide on {label}</span>
-    </label>
-  </div>
 );
 
 const FileUpload = ({ label, onChange }) => (

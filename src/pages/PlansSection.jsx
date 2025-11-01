@@ -74,7 +74,7 @@ const PlansSection = () => {
   };
 
   return (
-    <div className="p-6 bg-white rounded-lg shadow-md">
+    <div className="p-6 bg-white  ">
       {view === "create" ? (
         <>
           <h2 className="text-2xl font-semibold mb-4 border-b pb-2">

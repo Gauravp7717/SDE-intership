@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 export default function ChangePass() {
   return (
     <motion.div
-      className="p-6 bg-white rounded-2xl shadow-lg border border-gray-100 max-w-2xl mx-auto mt-10 w-[90%] sm:w-[80%] md:w-[60%] lg:w-[50%]"
+      className="p-6 bg-white  max-w-2xl mx-auto mt-10 w-[90%] sm:w-[80%] md:w-[60%] lg:w-[50%]"
       initial={{ opacity: 0, y: 40 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}

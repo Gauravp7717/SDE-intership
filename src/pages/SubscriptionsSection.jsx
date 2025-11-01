@@ -54,7 +54,7 @@ const SubscriptionSection = () => {
   };
 
   return (
-    <div className="p-6 bg-white rounded-lg shadow-md">
+    <div className="p-6 bg-white  ">
       {/* Top Nav */}
       <div className="flex justify-between items-center mb-6 border-b pb-3">
         <h2 className="text-2xl font-semibold text-gray-800">

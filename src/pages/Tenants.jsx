@@ -34,9 +34,9 @@ const Tenants = () => {
   };
 
   return (
-    <div className="p-6 bg-gray-50 min-h-screen">
+    <div className="p-6  min-h-screen">
       {view === "create" && (
-        <div className="bg-white p-6 rounded-lg shadow">
+        <div className="bg-white p-6 ">
           <h2 className="text-xl font-semibold border-b pb-2 mb-4">
             Create Tenant{" "}
             <span className="text-gray-500 text-sm">

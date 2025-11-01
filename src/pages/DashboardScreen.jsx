@@ -58,7 +58,7 @@ export default function DashboardScreen() {
   ];
 
   return (
-    <div className="p-6 bg-white rounded-lg shadow-sm border border-gray-200">
+    <div className="p-6 bg-white  ">
       <h2 className="text-lg font-semibold mb-6 text-gray-800 text-center">
         Dashboard Overview
       </h2>
@@ -117,8 +117,6 @@ export default function DashboardScreen() {
         })}
       </div>
 
- 
-    
       {/* ✅ Animation Keyframes */}
       <style>
         {`

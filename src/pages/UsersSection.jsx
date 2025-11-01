@@ -49,7 +49,7 @@ const UsersSection = () => {
   };
 
   return (
-    <div className="p-4 bg-white rounded-lg shadow-md w-full max-w-6xl mx-auto mt-2 border border-gray-200">
+    <div className="p-4 bg-white   w-full max-w-6xl mx-auto mt-2  ">
       {/* Navigation */}
       <div className="flex justify-between items-center mb-4 border-b pb-2">
         <h2 className="text-2xl font-semibold text-gray-800">

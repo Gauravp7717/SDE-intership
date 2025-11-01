@@ -16,9 +16,8 @@ import {
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Home from "../pages/Home";
-import UnitList from "../pages/UnitList";
-import PaymentType from "../pages/PaymentTypes";
-import TaxList from "../pages/TaxList";
+// import UnitList from "../pages/UnitList";
+
 import ChangePass from "../pages/ChangePass";
 import StoreTab from "../pages/StoreTab";
 import Footer from "./Footer";
@@ -30,6 +29,8 @@ import PlansSection from "../pages/PlansSection";
 import SubscriptionSection from "../pages/SubscriptionsSection";
 import UsersSection from "../pages/UsersSection";
 import { nav } from "framer-motion/client";
+import TaxlistSection from "../pages/TaxList.section";
+import PaymentTypeSection from "../pages/PaymentTypeSection";
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -39,8 +40,8 @@ export default function Dashboard() {
   // ✅ Routes
   const routeComponents = {
     "/unitlisttable": <UnitsListTable />,
-    "/paymenttype": <PaymentType />,
-    "/taxlist": <TaxList />,
+    "/paymenttype": <PaymentTypeSection />,
+    "/taxlistsection": <TaxlistSection />,
     "/changepass": <ChangePass />,
     "/storetab": <StoreTab />,
     "/": <DashboardScreen />,
@@ -67,7 +68,7 @@ export default function Dashboard() {
   const settingsSubmenu = [
     { name: "Store", icon: Store, path: "/storetab" },
     { name: "SMS/WhatsApp API", icon: MessageSquare, path: "/smsapi" },
-    { name: "Tax List", icon: Percent, path: "/taxlist" },
+    { name: "Tax List", icon: Percent, path: "/taxlistsection" },
     { name: "Units List", icon: List, path: "/unitlisttable" },
 
     { name: "Payment Types", icon: CreditCard, path: "/paymenttype" },
@@ -80,7 +81,7 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="flex h-screen bg-gray-50 overflow-hidden">
+    <div className="flex h-screen overflow-hidden">
       {/* Sidebar */}
       <motion.aside
         initial={{ x: -250 }}
@@ -89,7 +90,7 @@ export default function Dashboard() {
         className="w-64 bg-white shadow-lg flex flex-col border-r border-gray-200"
       >
         {/* Navigation */}
-        <nav className="flex-1 overflow-y-auto font-bold py-4">
+        <nav className="flex-1 overflow-y-auto py-4">
           {menuItems.map((item) => (
             <button
               key={item.name}
