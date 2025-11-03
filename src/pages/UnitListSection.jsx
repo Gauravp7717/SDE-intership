@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { ChevronDown } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -40,98 +40,107 @@ export default function UnitListSection() {
     console.log("Closing form");
     setUnitName("");
     setDescription("");
-    setShowNewUnitForm(false); // 🔹 Hide form and show list again
+    setShowNewUnitForm(false);
   };
 
-  // ✅ Conditional Rendering
-  if (showNewUnitForm) {
-    return (
-      <div className="min-h-screen ">
-        <motion.div
-          className="p-6 bg-white   max-w-2xl mx-auto mt-10 w-[90%] sm:w-[80%] md:w-[60%] lg:w-[50%]"
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-        >
-          <motion.h2
-            className="text-xl font-bold mb-6 text-gray-800 text-center"
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-          >
-            Add / Update Unit
-          </motion.h2>
+  // ✅ useRef for detecting outside clicks
+  const modalRef = useRef(null);
 
-          <div className="space-y-5">
-            {/* Unit Name Field */}
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.3 }}
-            >
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Unit Name <span className="text-red-500">*</span>
-              </label>
-              <input
-                type="text"
-                value={unitName}
-                onChange={(e) => setUnitName(e.target.value)}
-                className="w-full sm:w-3/4 px-4 py-2 border border-gray-300 rounded-lg 
-                focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none 
-                transition-all duration-200 shadow-sm hover:shadow-md"
-                placeholder="Enter unit name"
-              />
-            </motion.div>
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (modalRef.current && !modalRef.current.contains(event.target)) {
+        handleClose();
+      }
+    }
 
-            {/* Description Field */}
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.4 }}
-            >
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Description
-              </label>
-              <textarea
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                rows="4"
-                className="w-full sm:w-3/4 px-4 py-2 border border-gray-300 rounded-lg 
-                focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none 
-                transition-all duration-200 shadow-sm hover:shadow-md resize-none"
-                placeholder="Enter description"
-              />
-            </motion.div>
-          </div>
+    if (showNewUnitForm) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
 
-          <motion.div
-            className="flex flex-col sm:flex-row sm:space-x-4 mt-8 justify-center space-y-3 sm:space-y-0"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
-          >
-            <button
-              onClick={handleSave}
-              className="px-6 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition-transform transform hover:scale-105 duration-200 shadow-sm"
-            >
-              Save
-            </button>
-            <button
-              onClick={handleClose}
-              className="px-6 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-transform transform hover:scale-105 duration-200 shadow-sm"
-            >
-              Close
-            </button>
-          </motion.div>
-        </motion.div>
-      </div>
-    );
-  }
+    // cleanup
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [showNewUnitForm]);
 
   // ✅ Default View (Units List)
   return (
-    <div className="p-6  min-h-screen">
-      <div className="bg-white  ">
+    <div className="p-6 min-h-screen">
+      {showNewUnitForm && (
+        <motion.div
+          className="fixed inset-0 bg-black/40 bg-opacity-50 flex items-center justify-center z-50 backdrop-blur-sm"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+        >
+          {/* Modal Box */}
+          <motion.div
+            ref={modalRef}
+            className="p-6 bg-white rounded-2xl shadow-lg max-w-2xl mx-auto w-[90%] sm:w-[80%] md:w-[60%] lg:w-[50%]"
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >
+            <motion.h2
+              className="text-xl font-bold mb-6 text-gray-800 text-center"
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+            >
+              Add / Update Records
+            </motion.h2>
+
+            <div className="space-y-5">
+              {/* Unit Name Field */}
+              <motion.div
+                initial={{ opacity: 0, x: -30 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.3 }}
+              >
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Payment Type Name <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  value={unitName}
+                  onChange={(e) => setUnitName(e.target.value)}
+                  className="w-full sm:w-3/4 px-4 py-2 border border-gray-300 rounded-lg 
+                  focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none 
+                  transition-all duration-200 shadow-sm hover:shadow-md"
+                  placeholder="Enter unit name"
+                />
+              </motion.div>
+            </div>
+
+            <motion.div
+              className="flex flex-col sm:flex-row sm:space-x-4 mt-8 justify-center space-y-3 sm:space-y-0"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5 }}
+            >
+              <button
+                onClick={handleSave}
+                className="px-6 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 
+                transition-transform transform hover:scale-105 duration-200 shadow-sm"
+              >
+                Save
+              </button>
+              <button
+                onClick={handleClose}
+                className="px-6 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 
+                transition-transform transform hover:scale-105 duration-200 shadow-sm"
+              >
+                Close
+              </button>
+            </motion.div>
+          </motion.div>
+        </motion.div>
+      )}
+
+      {/* ===== Units List Table Section ===== */}
+      <div className="bg-white">
         {/* Header */}
         <div className="flex justify-between items-center p-4 border-b">
           <h1 className="text-xl font-semibold text-gray-800">Units List</h1>

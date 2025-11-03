@@ -44,7 +44,7 @@ export default function SmsApi() {
         </div>
 
         {/* ✅ Animated Tab Content */}
-        <AnimatePresence mode="wait">
+        <AnimatePresence>
           <motion.div
             key={activeTab}
             initial={{ opacity: 0, y: 15 }}
@@ -485,67 +485,12 @@ function FormField({ label, children }) {
   );
 }
 
-const Input = (props) => (
-  <input
-    {...props}
-    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sky-500 outline-none transition-all"
-  />
-);
-
-const Textarea = (props) => (
-  <textarea
-    {...props}
-    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sky-500 outline-none transition-all"
-  />
-);
-
 const Select = ({ options }) => (
   <select className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sky-500 outline-none transition-all">
     {options.map((opt) => (
       <option key={opt}>{opt}</option>
     ))}
   </select>
-);
-
-const CheckboxField = ({ label, name, checked, onChange }) => (
-  <FormField label={label}>
-    <label className="flex items-center space-x-2">
-      <input
-        type="checkbox"
-        name={name}
-        checked={checked}
-        onChange={(e) => {
-          if (onChange.length === 1) onChange(e);
-          else onChange(e.target.checked);
-        }}
-        className="w-4 h-4 accent-sky-500"
-      />
-      <span className="text-sm text-gray-700">Enable</span>
-    </label>
-  </FormField>
-);
-
-const FileUpload = ({ label, onChange }) => (
-  <FormField label={label}>
-    <input
-      type="file"
-      accept="image/*"
-      onChange={onChange}
-      className="block w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:bg-sky-100 file:text-sky-600 hover:file:bg-sky-200 cursor-pointer"
-    />
-  </FormField>
-);
-
-const InputField = ({ label, ...props }) => (
-  <FormField label={label}>
-    <Input {...props} />
-  </FormField>
-);
-
-const TextAreaField = ({ label, ...props }) => (
-  <FormField label={label}>
-    <Textarea {...props} />
-  </FormField>
 );
 
 const SelectField = ({ label, options, ...props }) => (
