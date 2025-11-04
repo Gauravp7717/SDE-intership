@@ -54,7 +54,7 @@ const Subscription = () => {
     setActivePage("list");
   };
 
-  // Helper component for Icons (Same as previous components)
+  // Action Icons Component
   const ActionIcons = () => (
     <div className="flex justify-center space-x-2">
       {/* Edit Icon Placeholder */}
@@ -80,7 +80,7 @@ const Subscription = () => {
         
         {/* Header and Create Button (Updated styling for consistency) */}
         <div className="flex justify-between items-center mb-6 pt-2">
-            <h2 className="text-2xl font-normal text-gray-800">
+            <h2 className="text-2xl font-bold text-gray-800">
                 Subscriptions List
             </h2>
             {activePage === "list" && (
@@ -104,26 +104,26 @@ const Subscription = () => {
               <thead className="bg-gray-50 border-b border-gray-200">
                 <tr>
                   {/* Headers: lowercase, text-xs, font-medium, padding px-6 py-3 */}
-                  <th className="px-6 py-3 text-left font-medium text-gray-500 tracking-wider text-xs w-1/12">#</th>
-                  <th className="px-6 py-3 text-left font-medium text-gray-500 tracking-wider text-xs w-2/12">tenant</th>
-                  <th className="px-6 py-3 text-left font-medium text-gray-500 tracking-wider text-xs w-2/12">plan</th>
-                  <th className="px-6 py-3 text-left font-medium text-gray-500 tracking-wider text-xs w-2/12">start at</th>
-                  <th className="px-6 py-3 text-left font-medium text-gray-500 tracking-wider text-xs w-2/12">end at</th>
-                  <th className="px-6 py-3 text-left font-medium text-gray-500 tracking-wider text-xs w-2/12">created date</th>
-                  <th className="px-6 py-3 text-center font-medium text-gray-500 tracking-wider text-xs w-1/12">status</th>
-                  <th className="px-6 py-3 text-center font-medium text-gray-500 tracking-wider text-xs w-2/12">action</th>
+                  <th className="px-6 py-3 text-left font-bold text-gray-500 tracking-wider text-xs w-1/12">Sr.</th>
+                  <th className="px-6 py-3 text-left font-bold text-gray-500 tracking-wider text-xs w-2/12">Tenant</th>
+                  <th className="px-6 py-3 text-left font-bold text-gray-500 tracking-wider text-xs w-2/12">Plan</th>
+                  <th className="px-6 py-3 text-left font-bold text-gray-500 tracking-wider text-xs w-2/12">Start at</th>
+                  <th className="px-6 py-3 text-left font-bold text-gray-500 tracking-wider text-xs w-2/12">End at</th>
+                  <th className="px-6 py-3 text-left font-bold text-gray-500 tracking-tight text-xs w-2/12">Created date</th>
+                  <th className="px-6 py-3 text-center font-bold text-gray-500 tracking-wider text-xs w-1/12">Status</th>
+                  <th className="px-6 py-3 text-center font-bold text-gray-500 tracking-wider text-xs w-2/12">Action</th>
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
                 {subscriptions.map((sub) => (
                   <tr key={sub.id} className="hover:bg-gray-50 transition duration-150">
                     {/* Data Cells: padding px-6 py-3 */}
-                    <td className="px-6 py-3 whitespace-nowrap text-gray-500">{sub.id}</td>
-                    <td className="px-6 py-3 whitespace-nowrap font-medium text-gray-900">{sub.tenant}</td>
-                    <td className="px-6 py-3 whitespace-nowrap text-gray-500">{sub.plan}</td>
-                    <td className="px-6 py-3 whitespace-nowrap text-gray-500">{sub.startAt}</td>
-                    <td className="px-6 py-3 whitespace-nowrap text-gray-500">{sub.endAt}</td>
-                    <td className="px-6 py-3 whitespace-nowrap text-gray-500">{sub.createdAt}</td>
+                    <td className="px-6 py-3 whitespace-nowrap text-gray-700">{sub.id}</td>
+                    <td className="px-6 py-3 whitespace-nowrap text-gray-700">{sub.tenant}</td>
+                    <td className="px-6 py-3 whitespace-nowrap text-gray-700">{sub.plan}</td>
+                    <td className="px-6 py-3 whitespace-nowrap text-gray-700">{sub.startAt}</td>
+                    <td className="px-6 py-3 whitespace-nowrap text-gray-700">{sub.endAt}</td>
+                    <td className="px-6 py-3 whitespace-nowrap text-gray-700">{sub.createdAt}</td>
                     <td className="px-6 py-3 whitespace-nowrap text-center">
                       {/* Status Badge Styling */}
                       <span className={`inline-flex items-center px-3 py-0.5 rounded-full text-xs font-medium ${

@@ -92,7 +92,7 @@ const PlansSection = () => {
   );
 
   return (
-    <div className="p-6 m-5 min-h-screen">
+    <div className="p-6  min-h-screen">
       {/* Plans List Section (Updated for UI Look) */}
       <div className={`bg-white p-6 rounded-lg shadow-md ${showModal ? "blur-sm pointer-events-none" : ""}`}>
         
