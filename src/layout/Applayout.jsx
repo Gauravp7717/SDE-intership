@@ -1,9 +1,16 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, Navigate } from "react-router-dom";
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import Footer from "../components/Footer";
+import { useAuth } from "../context/AuthContext";
 
 export default function AppLayout() {
+  const { isAuthenticated, userRole } = useAuth();
+
+  if (!isAuthenticated) {
+    return <Navigate to="/" replace />;
+  }
+
   return (
     <div className="flex flex-col min-h-screen">
       {/* Header */}
@@ -12,7 +19,7 @@ export default function AppLayout() {
       {/* Main content area */}
       <div className="flex flex-1 overflow-hidden">
         {/* Sidebar */}
-        <Sidebar />
+        <Sidebar role={userRole} />
 
         {/* Page Content */}
         <main className="flex-1 overflow-y-auto p-6">

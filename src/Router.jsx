@@ -6,8 +6,7 @@ import AppLayout from "./layout/Applayout";
 import Dashboard from "./pages/Dashboard";
 
 import ProtectedRoute from "./components/ProtectedRoute";
-import Hero2 from "./pages/PlansSection";
-import Hero3 from "./pages/Subscription";
+
 import Tenants from "./pages/Tenants";
 import PlansSection from "./pages/PlansSection";
 import Subscription from "./pages/Subscription";

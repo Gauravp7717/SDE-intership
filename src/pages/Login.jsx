@@ -8,19 +8,28 @@ export default function LoginSignup() {
   const [showPasswordSignIn, setShowPasswordSignIn] = useState(false);
   const [showPasswordSignUp, setShowPasswordSignUp] = useState(false);
   const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const navigate = useNavigate();
   const { login } = useAuth();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    login(username || "User"); // Store login state
-    navigate("/app"); // Redirect to app layout
+
+    // 🧩 Call login() from context
+    const result = login(username.trim(), password.trim());
+
+    if (result.success) {
+      navigate("/app"); // Redirect to app layout
+    } else {
+      setError(result.message);
+    }
   };
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-white">
-      <div className="relative w-[800px] h-[535px] md:h-[450px] bg-white rounded-2xl shadow-2xl overflow-hidden flex">
+      <div className="relative w-full h-full md:h-[776px] bg-white overflow-hidden flex">
         {/* ---------------------- SIGN IN ---------------------- */}
         <div
           className={`absolute pb-3 pt-3 bottom-0 md:top-0 left-0 w-full md:w-1/2 md:h-full flex flex-col items-center justify-center bg-white px-8 transition-all duration-700 ease-in-out ${
@@ -32,7 +41,7 @@ export default function LoginSignup() {
           <img
             src="/logo1.png"
             alt=""
-            className="flex items-center justify-center w-[150px] h-[120px]"
+            className="flex items-center justify-center w-[200px] mx-auto h-[125px]"
           />
           <h2 className="text-xl font-bold font-serif text-[#023e8a] mb-2">
             Welcome Back!
@@ -42,12 +51,12 @@ export default function LoginSignup() {
           </p>
 
           <form onSubmit={handleSubmit} className="w-full max-w-[300px]">
-            {/* Email / Username */}
+            {/* Username */}
             <div className="relative mb-2">
               <Mail className="absolute left-3 top-1 text-gray-400" size={17} />
               <input
                 type="text"
-                placeholder="Username or Email"
+                placeholder="Username"
                 required
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
@@ -55,13 +64,15 @@ export default function LoginSignup() {
               />
             </div>
 
-            {/* Password with toggle */}
+            {/* Password */}
             <div className="relative mb-3">
               <Lock className="absolute left-3 top-1 text-gray-400" size={17} />
               <input
                 type={showPasswordSignIn ? "text" : "password"}
                 placeholder="Password"
                 required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 className="w-full pl-10 pr-10 py-0.7 bg-gray-50 border border-gray-200 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-50"
               />
               <div
@@ -72,7 +83,10 @@ export default function LoginSignup() {
               </div>
             </div>
 
-            {/* Remember me + forgot */}
+            {error && (
+              <p className="text-red-500 text-sm mb-2 text-center">{error}</p>
+            )}
+
             <div className="flex justify-between">
               <div className="flex text-black text-center justify-start text-[12px]">
                 <input
@@ -86,7 +100,6 @@ export default function LoginSignup() {
               </p>
             </div>
 
-            {/* Sign In button */}
             <button
               type="submit"
               className="w-full py-1 bg-gradient-to-r from-[#03045e] to-[#0077b6] text-white text-sm rounded-xl font-semibold hover:bg-white transition"
@@ -94,7 +107,6 @@ export default function LoginSignup() {
               Sign In
             </button>
 
-            {/* Switch to Sign Up */}
             <div className="flex items-center justify-center text-black mt-1">
               <p className="text-[12px] font-poppins mt-1.5">
                 Don't have an account?
@@ -128,7 +140,6 @@ export default function LoginSignup() {
           </h2>
 
           <form onSubmit={handleSubmit} className="w-full max-w-[300px]">
-            {/* Name */}
             <div className="relative mb-2">
               <User className="absolute left-3 top-1 text-gray-400" size={17} />
               <input
@@ -139,7 +150,6 @@ export default function LoginSignup() {
               />
             </div>
 
-            {/* Email */}
             <div className="relative mb-2">
               <Mail className="absolute left-3 top-1 text-gray-400" size={17} />
               <input
@@ -150,7 +160,6 @@ export default function LoginSignup() {
               />
             </div>
 
-            {/* Password */}
             <div className="relative mb-3">
               <Lock className="absolute left-3 top-1 text-gray-400" size={17} />
               <input
@@ -167,7 +176,6 @@ export default function LoginSignup() {
               </div>
             </div>
 
-            {/* Sign Up button */}
             <button
               type="submit"
               className="w-full py-1 mt-3 bg-gradient-to-r from-[#03045e] to-[#0077b6] text-white rounded-xl text-sm font-semibold transition"
@@ -175,7 +183,6 @@ export default function LoginSignup() {
               Sign Up
             </button>
 
-            {/* Switch to Sign In */}
             <div className="flex items-center text-black justify-center mt-1">
               <p className="text-[12px] font-poppins mt-1.5">
                 Already have an account?
