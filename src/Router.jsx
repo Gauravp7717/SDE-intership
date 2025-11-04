@@ -11,7 +11,7 @@ import Hero3 from "./pages/Subscription";
 import Tenants from "./pages/Tenants";
 import PlansSection from "./pages/PlansSection";
 import Subscription from "./pages/Subscription";
-import UsersSection from "./pages/UserSection";
+import UsersSection from "./pages/UsersSection";
 import StoreTab from "./pages/StoreTab";
 import SmsApi from "./pages/SmsApi";
 import TaxlistSection from "./pages/TaxlistSection";
@@ -21,39 +21,36 @@ import ChangePass from "./pages/ChangePass";
 
 export default function Router() {
   return (
-    // ✅ Wrap everything inside AuthProvider
-    <AuthProvider>
-      <BrowserRouter>
-        <Routes>
-          {/* Public Route */}
-          <Route path="/" element={<Login />} />
+    <BrowserRouter>
+      <Routes>
+        {/* Public Route */}
+        <Route path="/" element={<Login />} />
 
-          {/* Protected Routes */}
-          <Route
-            path="/app"
-            element={
-              <ProtectedRoute>
-                <AppLayout />
-              </ProtectedRoute>
-            }
-          >
-            <Route index element={<Dashboard />} />
-            <Route path="tenants" element={<Tenants />} />
-            <Route path="planssection" element={<PlansSection />} />
-            <Route path="subscription" element={<Subscription />} />
-            <Route path="usersection" element={<UsersSection />} />
-            <Route path="storetab" element={<StoreTab />} />
-            <Route path="smsapi" element={<SmsApi />} />
-            <Route path="taxlistsection" element={<TaxlistSection />} />
-            <Route path="unitlistsection" element={<UnitListSection />} />
-            <Route path="paymenttypesection" element={<PaymentTypeSection />} />
-            <Route path="changepass" element={<ChangePass />} />
-          </Route>
+        {/* Protected Routes */}
+        <Route
+          path="/app"
+          element={
+            <ProtectedRoute>
+              <AppLayout />
+            </ProtectedRoute>
+          }
+        >
+          <Route index element={<Dashboard />} />
+          <Route path="tenants" element={<Tenants />} />
+          <Route path="planssection" element={<PlansSection />} />
+          <Route path="subscription" element={<Subscription />} />
+          <Route path="usersection" element={<UsersSection />} />
+          <Route path="storetab" element={<StoreTab />} />
+          <Route path="smsapi" element={<SmsApi />} />
+          <Route path="taxlistsection" element={<TaxlistSection />} />
+          <Route path="unitlistsection" element={<UnitListSection />} />
+          <Route path="paymenttypesection" element={<PaymentTypeSection />} />
+          <Route path="changepass" element={<ChangePass />} />
+        </Route>
 
-          {/* Fallback Route */}
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
-      </BrowserRouter>
-    </AuthProvider>
+        {/* Fallback Route */}
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
