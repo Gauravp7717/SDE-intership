@@ -1,12 +1,12 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { AuthProvider } from "./context/AuthContext";
-
 import Login from "./pages/Login";
 import AppLayout from "./layout/Applayout";
 import Dashboard from "./pages/Dashboard";
-
 import ProtectedRoute from "./components/ProtectedRoute";
+<<<<<<< HEAD
 
+=======
+>>>>>>> adding/tables
 import Tenants from "./pages/Tenants";
 import PlansSection from "./pages/PlansSection";
 import Subscription from "./pages/Subscription";

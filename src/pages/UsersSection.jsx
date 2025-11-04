@@ -80,7 +80,7 @@ const UsersSection = () => {
         
         {/* Header and Create Button */}
         <div className="flex justify-between items-center mb-6 pt-2">
-            <h2 className="text-2xl font-normal text-gray-800">
+            <h2 className="text-2xl font-bold text-gray-800">
                 Users List
             </h2>
             <button
@@ -101,30 +101,30 @@ const UsersSection = () => {
                 <thead className="bg-gray-50 border-b border-gray-200">
                     <tr>
                         {/* Headers: Reduced padding (px-4 py-2) and uses table-auto for widths */}
-                        <th className="px-4 py-2 text-left font-medium text-gray-500 tracking-wider text-xs w-[3%]">#</th>
-                        <th className="px-4 py-2 text-left font-medium text-gray-500 tracking-wider text-xs">store</th>
-                        <th className="px-4 py-2 text-left font-medium text-gray-500 tracking-wider text-xs">username</th>
-                        <th className="px-4 py-2 text-left font-medium text-gray-500 tracking-wider text-xs">name</th>
-                        <th className="px-4 py-2 text-left font-medium text-gray-500 tracking-wider text-xs">email</th>
-                        <th className="px-4 py-2 text-left font-medium text-gray-500 tracking-wider text-xs">tenant</th>
-                        <th className="px-4 py-2 text-left font-medium text-gray-500 tracking-wider text-xs">role</th>
-                        <th className="px-4 py-2 text-left font-medium text-gray-500 tracking-wider text-xs">created on</th>
-                        <th className="px-4 py-2 text-center font-medium text-gray-500 tracking-wider text-xs w-[8%]">status</th>
-                        <th className="px-4 py-2 text-center font-medium text-gray-500 tracking-wider text-xs w-[7%]">action</th>
+                        <th className="px-4 py-2 text-left font-bold text-gray-800 tracking-wider text-xs w-[3%]">Sr.</th>
+                        <th className="px-4 py-2 text-left font-bold text-gray-800 tracking-wider text-xs">Store</th>
+                        <th className="px-4 py-2 text-left font-bold text-gray-800 tracking-wider text-xs">Username</th>
+                        <th className="px-4 py-2 text-left font-bold text-gray-800 tracking-wider text-xs">Name</th>
+                        <th className="px-4 py-2 text-left font-bold text-gray-800 tracking-wider text-xs">Email</th>
+                        <th className="px-4 py-2 text-left font-bold text-gray-800 tracking-wider text-xs">Tenant</th>
+                        <th className="px-4 py-2 text-left font-bold text-gray-800 tracking-wider text-xs">Role</th>
+                        <th className="px-4 py-2 text-left font-bold text-gray-800 tracking-wider text-xs">Created on</th>
+                        <th className="px-4 py-2 text-center font-bold text-gray-800 tracking-wider text-xs w-[8%]">Status</th>
+                        <th className="px-4 py-2 text-center font-bold text-gray-800 tracking-wider text-xs w-[7%]">Action</th>
                     </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
                     {users.map((u) => (
                         <tr key={u.id} className="hover:bg-gray-50 transition duration-150">
                             {/* Data Cells: Reduced padding (px-4 py-2) */}
-                            <td className="px-4 py-2 whitespace-nowrap text-gray-500">{u.id}</td>
-                            <td className="px-4 py-2 whitespace-nowrap font-medium text-gray-900">{u.store}</td>
-                            <td className="px-4 py-2 whitespace-nowrap text-gray-500">{u.username}</td>
-                            <td className="px-4 py-2 whitespace-nowrap text-gray-500">{u.name}</td>
-                            <td className="px-4 py-2 whitespace-nowrap text-gray-500">{u.email}</td>
-                            <td className="px-4 py-2 whitespace-nowrap text-gray-500">{u.tenant}</td>
-                            <td className="px-4 py-2 whitespace-nowrap text-gray-500">{u.role}</td>
-                            <td className="px-4 py-2 whitespace-nowrap text-gray-500">{u.createdOn}</td>
+                            <td className="px-4 py-2 whitespace-nowrap  text-gray-700">{u.id}</td>
+                            <td className="px-4 py-2 whitespace-nowrap  text-gray-700">{u.store}</td>
+                            <td className="px-4 py-2 whitespace-nowrap text-gray-700">{u.username}</td>
+                            <td className="px-4 py-2 whitespace-nowrap text-gray-700">{u.name}</td>
+                            <td className="px-4 py-2 whitespace-nowrap text-gray-700">{u.email}</td>
+                            <td className="px-4 py-2 whitespace-nowrap text-gray-700">{u.tenant}</td>
+                            <td className="px-4 py-2 whitespace-nowrap text-gray-700">{u.role}</td>
+                            <td className="px-4 py-2 whitespace-nowrap text-gray-700">{u.createdOn}</td>
                             <td className="px-4 py-2 whitespace-nowrap text-center">
                                 {/* Status Badge Styling */}
                                 <span className={`inline-flex items-center px-3 py-0.5 rounded-full text-xs font-medium ${

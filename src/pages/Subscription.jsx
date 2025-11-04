@@ -104,14 +104,14 @@ const Subscription = () => {
               <thead className="bg-gray-50 border-b border-gray-200">
                 <tr>
                   {/* Headers: lowercase, text-xs, font-medium, padding px-6 py-3 */}
-                  <th className="px-6 py-3 text-left font-bold text-gray-500 tracking-wider text-xs w-1/12">Sr.</th>
-                  <th className="px-6 py-3 text-left font-bold text-gray-500 tracking-wider text-xs w-2/12">Tenant</th>
-                  <th className="px-6 py-3 text-left font-bold text-gray-500 tracking-wider text-xs w-2/12">Plan</th>
-                  <th className="px-6 py-3 text-left font-bold text-gray-500 tracking-wider text-xs w-2/12">Start at</th>
-                  <th className="px-6 py-3 text-left font-bold text-gray-500 tracking-wider text-xs w-2/12">End at</th>
-                  <th className="px-6 py-3 text-left font-bold text-gray-500 tracking-tight text-xs w-2/12">Created date</th>
-                  <th className="px-6 py-3 text-center font-bold text-gray-500 tracking-wider text-xs w-1/12">Status</th>
-                  <th className="px-6 py-3 text-center font-bold text-gray-500 tracking-wider text-xs w-2/12">Action</th>
+                  <th className="px-6 py-3 text-left font-bold text-gray-700 tracking-wider text-xs w-1/12">Sr.</th>
+                  <th className="px-6 py-3 text-left font-bold text-gray-700 tracking-wider text-xs w-2/12">Tenant</th>
+                  <th className="px-6 py-3 text-left font-bold text-gray-700 tracking-wider text-xs w-2/12">Plan</th>
+                  <th className="px-6 py-3 text-left font-bold text-gray-700 tracking-wider text-xs w-2/12">Start at</th>
+                  <th className="px-6 py-3 text-left font-bold text-gray-700 tracking-wider text-xs w-2/12">End at</th>
+                  <th className="px-6 py-3 text-left font-bold text-gray-700 tracking-tight text-xs w-2/12">Created date</th>
+                  <th className="px-6 py-3 text-center font-bold text-gray-700 tracking-wider text-xs w-1/12">Status</th>
+                  <th className="px-6 py-3 text-center font-bold text-gray-700 tracking-wider text-xs w-2/12">Action</th>
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
