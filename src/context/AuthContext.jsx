@@ -1,69 +1,58 @@
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [userRole, setUserRole] = useState(null); // ✅ store role (storeadmin/superadmin)
-  const [username, setUsername] = useState("");
+  const [userRole, setUserRole] = useState(null);
+  const [user, setUser] = useState(null);
+  // Track whether we've loaded persisted auth from storage to avoid
+  // redirecting protected routes before hydration completes.
+  const [isAuthLoaded, setIsAuthLoaded] = useState(false);
 
-  // 🧩 Dummy user data (temporary until backend)
-  const dummyUsers = [
-    { username: "storeadmin", password: "admin12", role: "storeadmin" },
-    { username: "superadmin", password: "admin123", role: "superadmin" },
-  ];
-
-  // ✅ Load login state from localStorage
+  // ✅ Load saved auth data from localStorage on app load
   useEffect(() => {
-    const loggedIn = localStorage.getItem("isLoggedIn");
-    const storedUser = localStorage.getItem("username");
-    const storedRole = localStorage.getItem("role");
+    const storedUser = localStorage.getItem("user");
+    const storedRole = localStorage.getItem("userRole");
+    const storedAuth = localStorage.getItem("isAuthenticated");
 
-    if (loggedIn === "true" && storedUser && storedRole) {
+    if (storedAuth === "true" && storedUser && storedRole) {
       setIsAuthenticated(true);
-      setUsername(storedUser);
+      setUser(JSON.parse(storedUser));
       setUserRole(storedRole);
     }
+
+    // Mark hydration complete whether or not we found stored auth.
+    setIsAuthLoaded(true);
   }, []);
 
-  // ✅ Login function with dummy authentication
-  const login = (inputUsername, inputPassword) => {
-    const foundUser = dummyUsers.find(
-      (user) =>
-        user.username === inputUsername && user.password === inputPassword
-    );
+  // ✅ Login function
+  const login = (userData) => {
+    setIsAuthenticated(true);
+    setUser(userData);
+    setUserRole(userData.role);
 
-    if (foundUser) {
-      // success
-      localStorage.setItem("isLoggedIn", "true");
-      localStorage.setItem("username", foundUser.username);
-      localStorage.setItem("role", foundUser.role);
-
-      setUsername(foundUser.username);
-      setUserRole(foundUser.role);
-      setIsAuthenticated(true);
-
-      return { success: true, role: foundUser.role };
-    } else {
-      // failed login
-      return { success: false, message: "Invalid credentials" };
-    }
+    // 🔒 Save to localStorage
+    localStorage.setItem("isAuthenticated", "true");
+    localStorage.setItem("user", JSON.stringify(userData));
+    localStorage.setItem("userRole", userData.role);
   };
 
-  // ✅ Logout clears localStorage
+  // ✅ Logout function
   const logout = () => {
-    localStorage.removeItem("isLoggedIn");
-    localStorage.removeItem("username");
-    localStorage.removeItem("role");
-
     setIsAuthenticated(false);
-    setUsername("");
+    setUser(null);
     setUserRole(null);
+
+    // 🧹 Clear everything from localStorage
+    localStorage.removeItem("isAuthenticated");
+    localStorage.removeItem("user");
+    localStorage.removeItem("userRole");
   };
 
   return (
     <AuthContext.Provider
-      value={{ isAuthenticated, username, userRole, login, logout }}
+      value={{ isAuthenticated, userRole, user, login, logout, isAuthLoaded }}
     >
       {children}
     </AuthContext.Provider>

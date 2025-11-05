@@ -1,11 +1,13 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import Login from "./pages/Login";
-import AppLayout from "./layout/Applayout";
-import Dashboard from "./pages/Dashboard";
-
 import ProtectedRoute from "./components/ProtectedRoute";
 
+// ✅ Single unified layout
+import AppLayout from "./layout/AppLayout";
+
+// Super Admin pages
+import Dashboard from "./pages/Dashboard";
 import Tenants from "./pages/Tenants";
 import PlansSection from "./pages/PlansSection";
 import Subscription from "./pages/Subscription";
@@ -17,18 +19,28 @@ import UnitListSection from "./pages/UnitListSection";
 import PaymentTypeSection from "./pages/PaymentTypeSection";
 import ChangePass from "./pages/ChangePass";
 
+// Store Admin pages
+import StoreDashboard from "./pages/storeadminpages/StoreDashboard";
+import Users from "./pages/storeadminpages/Users";
+import RolesList from "./pages/storeadminpages/RolesList";
+import Pos from "./pages/storeadminpages/Pos";
+import AddSales from "./pages/storeadminpages/AddSales";
+import SalesList from "./pages/storeadminpages/SalesList";
+import SalesPayment from "./pages/storeadminpages/SalesPayment";
+import SalesReturn from "./pages/storeadminpages/SalesReturn";
+
 export default function Router() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Public Route */}
+        {/* 🌐 Public Route */}
         <Route path="/" element={<Login />} />
 
-        {/* Protected Routes */}
+        {/* ✅ SUPER ADMIN ROUTES */}
         <Route
           path="/app"
           element={
-            <ProtectedRoute>
+            <ProtectedRoute role="superadmin">
               <AppLayout />
             </ProtectedRoute>
           }
@@ -46,7 +58,27 @@ export default function Router() {
           <Route path="changepass" element={<ChangePass />} />
         </Route>
 
-        {/* Fallback Route */}
+        {/* ✅ STORE ADMIN ROUTES */}
+        <Route
+          path="/store"
+          element={
+            <ProtectedRoute role="storeadmin">
+              <AppLayout />
+              {/* ✅ same layout — handles sidebar conditionally */}
+            </ProtectedRoute>
+          }
+        >
+          <Route path="dashboard" element={<StoreDashboard />} />
+          <Route path="userlist" element={<Users />} />
+          <Route path="roleslist" element={<RolesList />} />
+          <Route path="pos" element={<Pos />} />
+          <Route path="addsales" element={<AddSales />} />
+          <Route path="saleslist" element={<SalesList />} />
+          <Route path="salespayment" element={<SalesPayment />} />
+          <Route path="salesreturnlist" element={<SalesReturn />} />
+        </Route>
+
+        {/* 🚧 Fallback route */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>

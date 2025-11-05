@@ -17,11 +17,25 @@ export default function LoginSignup() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // 🧩 Call login() from context
-    const result = login(username.trim(), password.trim());
+    let result = { success: false, role: null, message: "" };
+
+    if (username === "superadmin" && password === "admin123") {
+      login({ role: "superadmin" });
+      result = { success: true, role: "superadmin" };
+    } else if (username === "storeadmin" && password === "admin12") {
+      login({ role: "storeadmin" });
+      result = { success: true, role: "storeadmin" };
+    } else {
+      result = { success: false, message: "Invalid username or password" };
+    }
 
     if (result.success) {
-      navigate("/app"); // Redirect to app layout
+      // ✅ Role-based navigation
+      if (result.role === "superadmin") {
+        navigate("/app", { replace: true });
+      } else if (result.role === "storeadmin") {
+        navigate("/store/dashboard", { replace: true });
+      }
     } else {
       setError(result.message);
     }
@@ -51,7 +65,6 @@ export default function LoginSignup() {
           </p>
 
           <form onSubmit={handleSubmit} className="w-full max-w-[300px]">
-            {/* Username */}
             <div className="relative mb-2">
               <Mail className="absolute left-3 top-1 text-gray-400" size={17} />
               <input
@@ -64,7 +77,6 @@ export default function LoginSignup() {
               />
             </div>
 
-            {/* Password */}
             <div className="relative mb-3">
               <Lock className="absolute left-3 top-1 text-gray-400" size={17} />
               <input
@@ -139,7 +151,10 @@ export default function LoginSignup() {
             Create Account
           </h2>
 
-          <form onSubmit={handleSubmit} className="w-full max-w-[300px]">
+          <form
+            onSubmit={(e) => e.preventDefault()}
+            className="w-full max-w-[300px]"
+          >
             <div className="relative mb-2">
               <User className="absolute left-3 top-1 text-gray-400" size={17} />
               <input
