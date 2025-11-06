@@ -150,6 +150,8 @@ export default function PaymentTypeSection() {
       )}
 
       {/* ===== Reusable DataTable ===== */}
+
+      <h2 className="text-2xl font-bold text-gray-800 mb-4">Payment List</h2>
       <DataTable
         columns={columns}
         data={paymentTypes}

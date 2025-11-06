@@ -58,6 +58,7 @@ export default function UnitListSection() {
 
   return (
     <div className="p-6 min-h-screen">
+      <h2 className="text-2xl font-bold text-gray-800 mb-4">Unit List</h2>
       {/* ✅ DataTable section */}
       <DataTable
         columns={columns}

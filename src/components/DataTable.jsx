@@ -37,10 +37,10 @@ export default function DataTable({
     Array.from({ length: totalPages }, (_, i) => i + 1);
 
   return (
-    <div className="bg-white rounded-lg shadow-md border border-gray-200">
+    <div className="bg-white ">
       {/* Header */}
       <div className="flex justify-between items-center p-4 border-b border-gray-200">
-        <h1 className="text-xl font-semibold text-gray-800">List</h1>
+        <h1 className="text-xl font-semibold text-gray-800"> </h1>
         {onAdd && (
           <button
             onClick={onAdd}

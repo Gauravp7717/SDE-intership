@@ -184,6 +184,7 @@ export default function TaxlistSection() {
           </motion.div>
         </motion.div>
       )}
+      <h2 className="text-2xl font-bold text-gray-800 mb-4">Tax List</h2>
 
       {/* Header & Toggle */}
       <div className="flex justify-between items-center p-4 mb-4">
