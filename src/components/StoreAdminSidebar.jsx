@@ -55,17 +55,18 @@ export default function StoreAdminSidebar() {
       ],
     },
     {
-      id: "shipping",
-      name: "Shipping",
+      id: "Contacts",
+      name: "Contacts",
       icon: Truck,
       submenu: [
-        { name: "Ship Orders", path: "/store/ship-orders", icon: List },
+        { name: "Add Customer", path: "/store/addcustomer", icon: CirclePlus },
         {
-          name: "Delivery Partners",
-          path: "/store/delivery-partners",
+          name: "Customer List",
+          path: "/store/customerlist",
           icon: List,
         },
-        { name: "Tracking", path: "/store/tracking", icon: List },
+        { name: "Add Supplier", path: "/store/addsupplier", icon: CirclePlus },
+        { name: "Supplier List", path: "/store/supplierlist", icon: List },
       ],
     },
     {

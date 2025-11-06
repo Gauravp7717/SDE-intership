@@ -28,6 +28,10 @@ import AddSales from "./pages/storeadminpages/AddSales";
 import SalesList from "./pages/storeadminpages/SalesList";
 import SalesPayment from "./pages/storeadminpages/SalesPayment";
 import SalesReturn from "./pages/storeadminpages/SalesReturn";
+import AddCustomer from "./pages/storeadminpages/AddCustomer";
+import CustomerList from "./pages/storeadminpages/CustomerList";
+import SupplierList from "./pages/storeadminpages/SupplierList";
+import AddSupplier from "./pages/storeadminpages/AddSupplier";
 
 export default function Router() {
   return (
@@ -76,6 +80,10 @@ export default function Router() {
           <Route path="saleslist" element={<SalesList />} />
           <Route path="salespayment" element={<SalesPayment />} />
           <Route path="salesreturnlist" element={<SalesReturn />} />
+          <Route path="addcustomer" element={<AddCustomer />} />
+          <Route path="customerlist" element={<CustomerList />} />
+          <Route path="supplierlist" element={<SupplierList />} />
+          <Route path="addsupplier" element={<AddSupplier />} />
         </Route>
 
         {/* 🚧 Fallback route */}
