@@ -16,6 +16,9 @@ import {
   MessageSquare,
   List,
   CirclePlus,
+  DollarSign,
+  LucideShare,
+  MailIcon,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -42,8 +45,9 @@ export default function StoreAdminSidebar() {
       id: "sales",
       name: "Sales Management",
       icon: CreditCard,
+
       submenu: [
-        { name: "POS", path: "/store/pos", icon: CirclePlus },
+        { name: "POS", path: "pos", icon: CirclePlus },
         { name: "ADD SALES", path: "/store/addsales", icon: CirclePlus },
         { name: "Sales List", path: "/store/saleslist", icon: List },
         { name: "Sales Payment", path: "/store/salespayment", icon: List },
@@ -67,6 +71,213 @@ export default function StoreAdminSidebar() {
         },
         { name: "Add Supplier", path: "/store/addsupplier", icon: CirclePlus },
         { name: "Supplier List", path: "/store/supplierlist", icon: List },
+        {
+          name: "Import Customer",
+          path: "/store/importcustomer",
+          icon: CirclePlus,
+        },
+        {
+          name: "Import Supplier",
+          path: "/store/importsupplier",
+          icon: CirclePlus,
+        },
+      ],
+    },
+    {
+      id: "advance",
+      name: "Advance",
+      icon: DollarSign,
+      submenu: [
+        { name: "Add Advance", path: "/store/addadvance", icon: CirclePlus },
+        { name: "Advance List", path: "/store/advancelist", icon: List },
+      ],
+    },
+    {
+      id: "coupons",
+      name: "coupons",
+      icon: Lock,
+      submenu: [
+        {
+          name: "Create Customer Coupon",
+          path: "/store/createcustomercoupon",
+          icon: CirclePlus,
+        },
+        {
+          name: "Customer Coupon List",
+          path: "/store/customercouponlist",
+          icon: List,
+        },
+        {
+          name: "Create Coupon",
+          path: "/store/createcoupon",
+          icon: CirclePlus,
+        },
+        { name: "Coupons Master", path: "/store/couponsmaster", icon: List },
+      ],
+    },
+    {
+      id: "quotation",
+      name: "Quotation",
+      icon: DollarSign,
+      submenu: [
+        {
+          name: "New Quotation",
+          path: "/store/newquotation",
+          icon: CirclePlus,
+        },
+        { name: "Quotation List", path: "/store/quatationlist", icon: List },
+      ],
+    },
+    {
+      id: "purchase",
+      name: "Purchase",
+      icon: ShoppingBag,
+      submenu: [
+        {
+          name: "New Purchase",
+          path: "/store/newpurchase",
+          icon: CirclePlus,
+        },
+        { name: "Purchase List", path: "/store/purchaselist", icon: List },
+        {
+          name: "Purchase Return List",
+          path: "/store/purchasereturnlist",
+          icon: List,
+        },
+      ],
+    },
+    {
+      id: "accounts",
+      name: "Accounts",
+      icon: BarChart,
+      submenu: [
+        {
+          name: "Add Account",
+          path: "/store/addaccount",
+          icon: CirclePlus,
+        },
+        { name: "Account List", path: "/store/accountlist", icon: List },
+        {
+          name: "Money Transfer List",
+          path: "/store/moneytransferlist",
+          icon: List,
+        },
+        { name: "Deposite List", path: "/store/depositelist", icon: List },
+        {
+          name: "Cash Transaction",
+          path: "/store/cashtransaction",
+          icon: LucideShare,
+        },
+      ],
+    },
+    {
+      id: "items",
+      name: "items",
+      icon: Package,
+      submenu: [
+        {
+          name: "Add Item",
+          path: "/store/additem",
+          icon: CirclePlus,
+        },
+        { name: "Add Service", path: "/store/addservice", icon: CirclePlus },
+        {
+          name: "Item List",
+          path: "/store/moneytransferlist",
+          icon: List,
+        },
+        { name: "Categories List", path: "/store/categorieslist", icon: List },
+        {
+          name: "Brand List",
+          path: "/store/brandlist",
+          icon: List,
+        },
+        {
+          name: "Variant List",
+          path: "/store/variantlist",
+          icon: List,
+        },
+        {
+          name: "Print Variables",
+          path: "/store/printvariables",
+          icon: List,
+        },
+        {
+          name: "Import Item",
+          path: "/store/importitem",
+          icon: CirclePlus,
+        },
+        {
+          name: "Import Services",
+          path: "/store/importservices",
+          icon: CirclePlus,
+        },
+      ],
+    },
+    {
+      id: "Stock",
+      name: "Stock",
+      icon: Settings,
+      submenu: [
+        { name: "Adjustment List", path: "/store/adjustmentlist", icon: List },
+        { name: "Transfer List", path: "/store/transferlist", icon: List },
+      ],
+    },
+
+    {
+      id: "expenses",
+      name: "Expenses",
+      icon: MessageSquare,
+      submenu: [
+        { name: "Expenses List", path: "/store/expenseslist", icon: List },
+        {
+          name: "Categories List",
+          path: "/store/expensecategorieslist",
+          icon: List,
+        },
+      ],
+    },
+    {
+      id: "places",
+      name: "Places",
+      icon: MessageSquare,
+      submenu: [
+        { name: "Countries List", path: "/store/countrieslist", icon: List },
+        {
+          name: "State List",
+          path: "/store/statelist",
+          icon: List,
+        },
+      ],
+    },
+    {
+      id: "messaging",
+      name: "Messaging",
+      icon: MailIcon,
+      submenu: [
+        { name: "Send Message", path: "/store/sendmessage", icon: MailIcon },
+        {
+          name: "Messaging Template",
+          path: "/store/messagingtemplate",
+          icon: List,
+        },
+      ],
+    },
+    {
+      id: "Warehouse",
+      name: "Warehouse",
+      icon: Truck,
+      submenu: [
+        {
+          name: "Add Warehouse",
+          path: "/store/addwarehouse",
+          icon: CirclePlus,
+        },
+        {
+          name: "Warehouse list",
+          path: "/store/warehouselist",
+          icon: List,
+        },
       ],
     },
     {
@@ -74,21 +285,56 @@ export default function StoreAdminSidebar() {
       name: "Settings",
       icon: Settings,
       submenu: [
-        { name: "Store Info", path: "/store/settings/info", icon: List },
-        { name: "Tax List", path: "/store/settings/tax", icon: List },
-        { name: "Payment Types", path: "/store/settings/payment", icon: List },
-        { name: "Units List", path: "/store/settings/units", icon: List },
-      ],
-    },
-    {
-      id: "account",
-      name: "Account",
-      icon: Lock,
-      submenu: [
-        { name: "Profile", path: "/store/profile", icon: List },
-        { name: "Notifications", path: "/store/notifications", icon: List },
-        { name: "Change Password", path: "/store/change-password", icon: List },
-        { name: "Support", path: "/store/support", icon: List },
+        {
+          name: "Store",
+          path: "/store/storetab",
+          icon: CirclePlus,
+        },
+        {
+          name: "Site Settings",
+          path: "/store/warehouselist",
+          icon: List,
+        },
+        {
+          name: "SMS/Whatsapp API",
+          path: "/store/smsapi",
+          icon: List,
+        },
+        {
+          name: "SMTP",
+          path: "/store/smtp",
+          icon: List,
+        },
+        {
+          name: "Tax List",
+          path: "/store/taxlist",
+          icon: List,
+        },
+        {
+          name: "Units List",
+          path: "/store/unitslist",
+          icon: List,
+        },
+        {
+          name: "Payment types",
+          path: "/store/paymenttypesection",
+          icon: List,
+        },
+        {
+          name: "Currency List",
+          path: "/store/currencylist",
+          icon: List,
+        },
+        {
+          name: "Change Password",
+          path: "/store/changepass",
+          icon: List,
+        },
+        {
+          name: "Database Backup",
+          path: "/store/warehouselist",
+          icon: List,
+        },
       ],
     },
   ];

@@ -4,6 +4,7 @@ import Sidebar from "../components/Sidebar";
 import StoreAdminSidebar from "../components/StoreAdminSidebar";
 import Footer from "../components/Footer";
 import { useAuth } from "../context/AuthContext";
+import Pos from "../pages/storeadminpages/Pos";
 
 export default function AppLayout() {
   const { isAuthenticated, userRole } = useAuth();

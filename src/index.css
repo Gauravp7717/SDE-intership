@@ -1,10 +1,11 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lexend:wght@100..900&family=Oswald:wght@200..700&display=swap");
+
+@theme {
+  /* Define your global font families */
+  --font-sans: "Lexend", sans-serif;
+  --font-lexend: "Inter", sans-serif;
+
+  --font-oswald: "Oswald", sans-serif;
+}
 @import "tailwindcss";
 /* ./src/index.css (Below the @import and above the @tailwind directives) */
-@theme {
-  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
-    Arial, sans-serif;
-}
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
