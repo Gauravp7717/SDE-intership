@@ -67,6 +67,10 @@ import SendMessage from "./pages/storeadminpages/SendMessage";
 import MessagingTemplate from "./pages/storeadminpages/MessagingTemplate";
 import AddWarehouse from "./pages/storeadminpages/AddWarehouse";
 import WarehouseList from "./pages/storeadminpages/WarehouseList";
+import NewQuotation from "./pages/storeadminpages/NewQuotation";
+import QuotationList from "./pages/storeadminpages/QuotationList";
+import CurrencyList from "./pages/storeadminpages/CurrencyList";
+import SMTP from "./pages/storeadminpages/SMTP";
 
 export default function Router() {
   return (
@@ -122,6 +126,7 @@ export default function Router() {
           <Route path="importcustomer" element={<ImportCustomer />} />
           <Route path="importsupplier" element={<ImportSupplier />} />
           <Route path="addadvance" element={<AddAdvance />} />
+          <Route path="advancelist" element={<AdvanceList />} />
           <Route
             path="createcustomercoupon"
             element={<CreateCutomerCoupon />}
@@ -129,6 +134,8 @@ export default function Router() {
           <Route path="customercouponlist" element={<CustomerCouponList />} />
           <Route path="createcoupon" element={<CreateCoupon />} />
           <Route path="CouponsMaster" element={<CouponsMaster />} />
+          <Route path="newquotation" element={<NewQuotation />} />
+          <Route path="quotationlist" element={<QuotationList />} />
           <Route path="newpurchase" element={<NewPurchase />} />
           <Route path="purchaselist" element={<PurchaseList />} />
           <Route path="purchasereturnlist" element={<PurchaseReturnList />} />
@@ -164,7 +171,9 @@ export default function Router() {
           <Route path="unitlistsection" element={<UnitListSection />} />
           <Route path="changepass" element={<ChangePass />} />
           <Route path="smsapi" element={<SmsApi />} />
+          <Route path="smtp" element={<SMTP />} />
           <Route path="storetab" element={<StoreTab />} />
+          <Route path="currencylist" element={<CurrencyList />} />
         </Route>
 
         {/* 🚧 Fallback route */}

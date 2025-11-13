@@ -125,7 +125,7 @@ export default function StoreAdminSidebar() {
           path: "/store/newquotation",
           icon: CirclePlus,
         },
-        { name: "Quotation List", path: "/store/quatationlist", icon: List },
+        { name: "Quotation List", path: "/store/quotationlist", icon: List },
       ],
     },
     {
@@ -183,7 +183,7 @@ export default function StoreAdminSidebar() {
         { name: "Add Service", path: "/store/addservice", icon: CirclePlus },
         {
           name: "Item List",
-          path: "/store/moneytransferlist",
+          path: "/store/itemlist",
           icon: List,
         },
         { name: "Categories List", path: "/store/categorieslist", icon: List },

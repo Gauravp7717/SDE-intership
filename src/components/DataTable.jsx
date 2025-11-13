@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from "react";
+import Filter from "./Filter";
 
 // ✅ Reusable Table Component
 export default function DataTable({
@@ -10,6 +11,8 @@ export default function DataTable({
   onEdit,
   onDelete,
   addButtonText,
+  showFilter = false,
+  filterFields = ["warehouse", "customer", "user", "fromDate", "toDate"],
   onAdd,
 }) {
   const [searchTerm, setSearchTerm] = useState("");
@@ -39,18 +42,19 @@ export default function DataTable({
   return (
     <div className="bg-white ">
       {/* Header */}
-      <div className="flex justify-between items-center p-4 border-b border-gray-200">
-        <h1 className="text-xl font-semibold text-gray-800"> </h1>
-        {onAdd && (
-          <button
-            onClick={onAdd}
-            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 flex items-center gap-2 text-sm"
-          >
-            + {addButtonText || "Add New"}
-          </button>
-        )}
-      </div>
-
+      {showFilter && (
+        <div className="flex gap-3 items-center justify-between p-4 border-b border-gray-200">
+          <Filter className="flex-1 min-w-0" fields={filterFields} />
+          {onAdd && (
+            <button
+              onClick={onAdd}
+              className="flex-shrink-0 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 flex items-center gap-2 text-sm"
+            >
+              + {addButtonText || "Add New"}
+            </button>
+          )}
+        </div>
+      )}
       {/* Controls */}
       <div className="flex justify-between items-center p-4 border-b border-gray-200">
         <div className="flex items-center gap-2 text-sm">
@@ -85,7 +89,6 @@ export default function DataTable({
           </div>
         )}
       </div>
-
       {/* Table */}
       <div className="overflow-x-auto">
         <table className="w-full table-auto text-sm">
@@ -172,7 +175,6 @@ export default function DataTable({
           </tbody>
         </table>
       </div>
-
       {/* Footer */}
       {showPagination && (
         <div className="flex justify-between items-center p-4 border-t border-gray-200">

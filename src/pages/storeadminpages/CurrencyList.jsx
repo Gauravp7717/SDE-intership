@@ -1,32 +1,37 @@
 import React from "react";
 import DataTable from "../../components/DataTable"; // adjust import as needed
 
-const categories = [
+const currencies = [
   {
-    categoryName: "Logistics",
-    description: "",
+    currencyName: "USD",
+    currencyCode: "1101",
+    currencySymbol: "$",
     status: "Active",
   },
   {
-    categoryName: "Hardware",
-    description: "",
+    currencyName: "DEMO",
+    currencyCode: "17e981",
+    currencySymbol: "☀️",
     status: "Active",
   },
   {
-    categoryName: "Software",
-    description: "",
+    currencyName: "MUR",
+    currencyCode: "121",
+    currencySymbol: "₹",
     status: "Active",
   },
   {
-    categoryName: "Marketing",
-    description: "",
+    currencyName: "Indian Rupee",
+    currencyCode: "INR",
+    currencySymbol: "₹",
     status: "Active",
   },
 ];
 
 const columns = [
-  { header: "Category Name", key: "categoryName" },
-  { header: "Description", key: "description" },
+  { header: "Currency Name", key: "currencyName" },
+  { header: "Currency Code", key: "currencyCode" },
+  { header: "Currency Symbol", key: "currencySymbol" },
   {
     header: "Status",
     key: "status",
@@ -44,22 +49,20 @@ const columns = [
   },
 ];
 
-const ExpenseCategoriesList = () => {
-  const handleEdit = (row) => alert(`Edit category ${row.categoryName}`);
-  const handleDelete = (row) => alert(`Delete category ${row.categoryName}`);
+const CurrencyList = () => {
+  const handleEdit = (row) => alert(`Edit currency: ${row.currencyName}`);
+  const handleDelete = (row) => alert(`Delete currency: ${row.currencyName}`);
 
   return (
     <div className="p-6 space-y-6">
-      <h2 className="text-xl font-bold mb-6 text-gray-800">
-        Expense Categories List
-      </h2>
+      <h2 className="text-xl font-bold mb-6 text-gray-800">Currencies List</h2>
       <DataTable
         columns={columns}
-        data={categories}
+        data={currencies}
         entriesPerPage={10}
         showSearch={true}
         showPagination={true}
-        addButtonText="Add Category"
+        addButtonText="Add Currency"
         onAdd={() => {}}
         onEdit={handleEdit}
         onDelete={handleDelete}
@@ -68,4 +71,4 @@ const ExpenseCategoriesList = () => {
   );
 };
 
-export default ExpenseCategoriesList;
+export default CurrencyList;

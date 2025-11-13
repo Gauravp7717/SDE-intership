@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import DataTable from "../../components/DataTable";
 import {
   ShoppingCart,
   DollarSign,
@@ -45,6 +46,85 @@ function useCountUp(endValue, duration = 1200) {
 
   return value;
 }
+
+// --- STOCK ALERT DATA ---
+const stockAlertData = [
+  {
+    code: "IT020321",
+    name: "yyyy",
+    category: "Electronics",
+    brand: "Samsung",
+    stock: "0.00",
+  },
+  {
+    code: "IT020318",
+    name: "wwww",
+    category: "Electronics",
+    brand: "Samsung",
+    stock: "0.00",
+  },
+  {
+    code: "IT020322",
+    name: "Gulab Jamun",
+    category: "Bakery",
+    brand: "-",
+    stock: "0.00",
+  },
+  {
+    code: "IT020323",
+    name: "Boat headphones",
+    category: "Electronics",
+    brand: "-",
+    stock: "0.00",
+  },
+  {
+    code: "IT020324",
+    name: "Iphone 17",
+    category: "Electronics",
+    brand: "Apple",
+    stock: "0.00",
+  },
+  {
+    code: "IT020325",
+    name: "Mobile",
+    category: "Electronics",
+    brand: "Apple",
+    stock: "0.00",
+  },
+  {
+    code: "IT020326",
+    name: "Sweets",
+    category: "Groceries",
+    brand: "-",
+    stock: "0.00",
+  },
+  {
+    code: "IT020327",
+    name: "LG TV",
+    category: "Electronics",
+    brand: "Bajaj",
+    stock: "0.00",
+  },
+  {
+    code: "IT020328",
+    name: "Mobile",
+    category: "Electronics",
+    brand: "Samsung",
+    stock: "0.00",
+  },
+];
+
+const stockAlertColumns = [
+  { header: "#", key: "code" },
+  { header: "Item Name", key: "name" },
+  { header: "Category Name", key: "category" },
+  { header: "Brand Name", key: "brand" },
+  {
+    header: "Stock",
+    key: "stock",
+    render: (value) => <span className="text-red-700 font-bold">{value}</span>,
+  },
+];
 
 export default function StoreAdminDashboard() {
   const [activeFilter, setActiveFilter] = useState("Today");
@@ -119,72 +199,6 @@ export default function StoreAdminDashboard() {
     { id: 5, name: "Laptop Stand", price: "₹1,850" },
     { id: 6, name: "Keyboard", price: "₹1,400" },
     { id: 7, name: "Desk Lamp", price: "₹2,200" },
-  ];
-
-  const stockAlerts = [
-    {
-      code: "IT020321",
-      name: "yyyy",
-      category: "Electronics",
-      brand: "Samsung",
-      stock: "0.00",
-    },
-    {
-      code: "IT020318",
-      name: "wwww",
-      category: "Electronics",
-      brand: "Samsung",
-      stock: "0.00",
-    },
-    {
-      code: "IT020322",
-      name: "Gulab Jamun",
-      category: "Bakery",
-      brand: "-",
-      stock: "0.00",
-    },
-    {
-      code: "IT020323",
-      name: "Boat headphones",
-      category: "Electronics",
-      brand: "-",
-      stock: "0.00",
-    },
-    {
-      code: "IT020324",
-      name: "Iphone 17",
-      category: "Electronics",
-      brand: "Apple",
-      stock: "0.00",
-    },
-    {
-      code: "IT020325",
-      name: "Mobile",
-      category: "Electronics",
-      brand: "Apple",
-      stock: "0.00",
-    },
-    {
-      code: "IT020326",
-      name: "Sweets",
-      category: "Groceries",
-      brand: "-",
-      stock: "0.00",
-    },
-    {
-      code: "IT020327",
-      name: "LG TV",
-      category: "Electronics",
-      brand: "Bajaj",
-      stock: "0.00",
-    },
-    {
-      code: "IT020328",
-      name: "Mobile",
-      category: "Electronics",
-      brand: "Samsung",
-      stock: "0.00",
-    },
   ];
 
   const trendingItems = [
@@ -292,7 +306,6 @@ export default function StoreAdminDashboard() {
             </ResponsiveContainer>
           </div>
         </div>
-
         {/* Recently Added Items */}
         <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-4 flex flex-col">
           <h3 className="text-md font-semibold text-gray-800 mb-4">
@@ -329,215 +342,165 @@ export default function StoreAdminDashboard() {
         </div>
       </div>
 
-      {/* 📦 Stock Alert Table */}
+      {/* 📦 Stock Alert Table (Reusable DataTable) */}
       <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-4">
         <h3 className="text-md font-semibold text-gray-800 mb-4 uppercase tracking-wide">
           STOCK ALERT
         </h3>
-
-        {/* Controls */}
-        <div className="flex flex-wrap justify-between items-center mb-3">
-          <div className="flex items-center space-x-2 text-sm">
-            <span>Show</span>
-            <select className="border border-gray-300 rounded px-2 py-1 focus:outline-none">
-              <option>10</option>
-              <option>25</option>
-              <option>50</option>
-              <option>100</option>
-            </select>
-            <span>entries</span>
-          </div>
-
-          <div className="flex flex-wrap gap-2">
-            {["Copy", "Excel", "PDF", "Print", "CSV", "Columns"].map((btn) => (
-              <button
-                key={btn}
-                className="bg-teal-400 hover:bg-teal-500 text-white px-3 py-1 rounded text-sm font-medium transition"
-              >
-                {btn}
-              </button>
-            ))}
-            <div className="flex items-center space-x-1">
-              <label className="text-sm text-gray-700">Search:</label>
-              <input
-                type="text"
-                className="border border-gray-300 rounded px-2 py-1 text-sm focus:outline-none"
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* Table */}
-        <div className="overflow-x-auto">
-          <table className="min-w-full border border-gray-300 text-sm text-left">
-            <thead className="bg-[#FFF8E1] text-gray-700">
-              <tr>
-                <th className="py-2 px-3 border font-semibold text-center w-24">
-                  #
-                </th>
-                <th className="py-2 px-3 border font-semibold">Item Name</th>
-                <th className="py-2 px-3 border font-semibold">
-                  Category Name
-                </th>
-                <th className="py-2 px-3 border font-semibold">Brand Name</th>
-                <th className="py-2 px-3 border font-semibold text-right">
-                  Stock
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {stockAlerts.map((item, i) => (
-                <tr
-                  key={i}
-                  className={`${
-                    i % 2 === 0 ? "bg-white" : "bg-gray-50"
-                  } hover:bg-gray-100 transition`}
-                >
-                  <td className="py-2 px-3 border text-gray-700">
-                    {item.code}
-                  </td>
-                  <td className="py-2 px-3 border text-gray-800 font-medium">
-                    {item.name}
-                  </td>
-                  <td className="py-2 px-3 border text-gray-700">
-                    {item.category}
-                  </td>
-                  <td className="py-2 px-3 border text-gray-700">
-                    {item.brand}
-                  </td>
-                  <td className="py-2 px-3 border text-right text-gray-700">
-                    {item.stock}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+        <DataTable
+          columns={stockAlertColumns}
+          data={stockAlertData}
+          entriesPerPage={10}
+          showSearch={true}
+          showPagination={true}
+          addButtonText="Add Item"
+          onAdd={() => {}}
+          // Optionally include onEdit and onDelete
+          // onEdit={row => alert("Edit " + row.code)}
+          // onDelete={row => alert("Delete " + row.code)}
+        />
       </div>
 
       {/* 🥧 Top 10 Trending Items & Recent Sales Invoices */}
-<div className="grid grid-cols-1 lg:grid-cols-[2.25fr_1fr] gap-6 mt-8 items-stretch">
-  {/* Pie Chart Section (wider) */}
-  <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-4 flex flex-col">
-    <h3 className="text-md font-semibold text-gray-800 mb-4 uppercase tracking-wide">
-      TOP 10 TRENDING ITEMS
-    </h3>
-
-    
-
-    {/* Pie Chart - taller to match invoice column height */}
-    <div className="w-full flex-1 min-h-[500px]">
-      <ResponsiveContainer width="100%" height="100%">
-        <PieChart>
-          <Pie
-            data={trendingItems}
-            dataKey="value"
-            nameKey="name"
-            cx="50%"
-            cy="50%"
-            innerRadius={60}
-            outerRadius={150}
-            paddingAngle={1}
-          >
-            {trendingItems.map((entry, index) => (
-              <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />
-            ))}
-          </Pie>
-          <Tooltip />
-          <Legend
-            layout="horizontal"
-            verticalAlign="top"
-            align="center"
-            wrapperStyle={{ fontSize: "12px", marginTop: "10px" }}
-          />
-        </PieChart>
-      </ResponsiveContainer>
-    </div>
-  </div>
-
-  {/* 📋 Recent Sales Invoices (taller, scrollable) */}
-  <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-4 flex flex-col">
-    <h3 className="text-md font-semibold text-gray-800 mb-4 uppercase tracking-wide">
-      RECENT SALES INVOICES
-    </h3>
-
-    {/* make this area expand vertically and scroll */}
-    <div className="overflow-y-auto flex-1">
-      <table className="min-w-full border border-gray-300 text-sm text-left">
-        <thead className="bg-[#F9FAFB] text-gray-700">
-          <tr>
-            <th className="py-2 px-3 border font-semibold text-center w-16">Sl.No</th>
-            <th className="py-2 px-3 border font-semibold">Date</th>
-            <th className="py-2 px-3 border font-semibold">Invoice ID</th>
-            <th className="py-2 px-3 border font-semibold">Customer</th>
-            <th className="py-2 px-3 border font-semibold text-right">Total</th>
-            <th className="py-2 px-3 border font-semibold text-center">Status</th>
-            <th className="py-2 px-3 border font-semibold">Created By</th>
-          </tr>
-        </thead>
-        <tbody>
-          {[
-            {
-              date: "25-10-2025",
-              id: "SL71",
-              customer: "Walk-in customer",
-              total: "₹1,380.000",
-              status: "Paid",
-              createdBy: "Lokesh",
-            },
-            {
-              date: "24-10-2025",
-              id: "SL70",
-              customer: "Walk-in customer",
-              total: "₹690.000",
-              status: "Paid",
-              createdBy: "Lokesh",
-            },
-            {
-              date: "17-10-2025",
-              id: "SL68",
-              customer: "NEOS / ZORBAS THE GREEK",
-              total: "₹11,498.850",
-              status: "Paid",
-              createdBy: "John",
-            },
-            {
-              date: "15-10-2025",
-              id: "SL66",
-              customer: "NEOS / ZORBAS THE GREEK",
-              total: "₹138,000.000",
-              status: "Paid",
-              createdBy: "John",
-            },
-            {
-              date: "30-09-2025",
-              id: "SL56",
-              customer: "Walk-in customer",
-              total: "₹110,000.000",
-              status: "Paid",
-              createdBy: "Shubham",
-            },
-            // add more rows as needed; this tbody scrolls vertically
-          ].map((invoice, i) => (
-            <tr
-              key={i}
-              className={`${i % 2 === 0 ? "bg-white" : "bg-gray-50"} hover:bg-gray-100 transition`}
-            >
-              <td className="py-2 px-3 border text-center text-gray-700">{i + 1}</td>
-              <td className="py-2 px-3 border text-gray-700">{invoice.date}</td>
-              <td className="py-2 px-3 border text-gray-700">{invoice.id}</td>
-              <td className="py-2 px-3 border text-gray-800 font-medium">{invoice.customer}</td>
-              <td className="py-2 px-3 border text-right text-gray-700">{invoice.total}</td>
-              <td className="py-2 px-3 border text-center text-green-600 font-semibold">{invoice.status}</td>
-              <td className="py-2 px-3 border text-gray-700">{invoice.createdBy}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  </div>
-</div>
-
+      <div className="grid grid-cols-1 lg:grid-cols-[2.25fr_1fr] gap-6 mt-8 items-stretch">
+        {/* Pie Chart Section (wider) */}
+        <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-4 flex flex-col">
+          <h3 className="text-md font-semibold text-gray-800 mb-4 uppercase tracking-wide">
+            TOP 10 TRENDING ITEMS
+          </h3>
+          <div className="w-full flex-1 min-h-[500px]">
+            <ResponsiveContainer width="100%" height="100%">
+              <PieChart>
+                <Pie
+                  data={trendingItems}
+                  dataKey="value"
+                  nameKey="name"
+                  cx="50%"
+                  cy="50%"
+                  innerRadius={60}
+                  outerRadius={150}
+                  paddingAngle={1}
+                >
+                  {trendingItems.map((entry, index) => (
+                    <Cell
+                      key={`cell-${index}`}
+                      fill={colors[index % colors.length]}
+                    />
+                  ))}
+                </Pie>
+                <Tooltip />
+                <Legend
+                  layout="horizontal"
+                  verticalAlign="top"
+                  align="center"
+                  wrapperStyle={{ fontSize: "12px", marginTop: "10px" }}
+                />
+              </PieChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+        {/* 📋 Recent Sales Invoices (taller, scrollable) */}
+        <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-4 flex flex-col">
+          <h3 className="text-md font-semibold text-gray-800 mb-4 uppercase tracking-wide">
+            RECENT SALES INVOICES
+          </h3>
+          <div className="overflow-y-auto flex-1">
+            <table className="min-w-full border border-gray-300 text-sm text-left">
+              <thead className="bg-[#F9FAFB] text-gray-700">
+                <tr>
+                  <th className="py-2 px-3 border font-semibold text-center w-16">
+                    Sl.No
+                  </th>
+                  <th className="py-2 px-3 border font-semibold">Date</th>
+                  <th className="py-2 px-3 border font-semibold">Invoice ID</th>
+                  <th className="py-2 px-3 border font-semibold">Customer</th>
+                  <th className="py-2 px-3 border font-semibold text-right">
+                    Total
+                  </th>
+                  <th className="py-2 px-3 border font-semibold text-center">
+                    Status
+                  </th>
+                  <th className="py-2 px-3 border font-semibold">Created By</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  {
+                    date: "25-10-2025",
+                    id: "SL71",
+                    customer: "Walk-in customer",
+                    total: "₹1,380.000",
+                    status: "Paid",
+                    createdBy: "Lokesh",
+                  },
+                  {
+                    date: "24-10-2025",
+                    id: "SL70",
+                    customer: "Walk-in customer",
+                    total: "₹690.000",
+                    status: "Paid",
+                    createdBy: "Lokesh",
+                  },
+                  {
+                    date: "17-10-2025",
+                    id: "SL68",
+                    customer: "NEOS / ZORBAS THE GREEK",
+                    total: "₹11,498.850",
+                    status: "Paid",
+                    createdBy: "John",
+                  },
+                  {
+                    date: "15-10-2025",
+                    id: "SL66",
+                    customer: "NEOS / ZORBAS THE GREEK",
+                    total: "₹138,000.000",
+                    status: "Paid",
+                    createdBy: "John",
+                  },
+                  {
+                    date: "30-09-2025",
+                    id: "SL56",
+                    customer: "Walk-in customer",
+                    total: "₹110,000.000",
+                    status: "Paid",
+                    createdBy: "Shubham",
+                  },
+                  // add more rows as needed; this tbody scrolls vertically
+                ].map((invoice, i) => (
+                  <tr
+                    key={i}
+                    className={`${
+                      i % 2 === 0 ? "bg-white" : "bg-gray-50"
+                    } hover:bg-gray-100 transition`}
+                  >
+                    <td className="py-2 px-3 border text-center text-gray-700">
+                      {i + 1}
+                    </td>
+                    <td className="py-2 px-3 border text-gray-700">
+                      {invoice.date}
+                    </td>
+                    <td className="py-2 px-3 border text-gray-700">
+                      {invoice.id}
+                    </td>
+                    <td className="py-2 px-3 border text-gray-800 font-medium">
+                      {invoice.customer}
+                    </td>
+                    <td className="py-2 px-3 border text-right text-gray-700">
+                      {invoice.total}
+                    </td>
+                    <td className="py-2 px-3 border text-center text-green-600 font-semibold">
+                      {invoice.status}
+                    </td>
+                    <td className="py-2 px-3 border text-gray-700">
+                      {invoice.createdBy}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
 
       {/* Animation Styles */}
       <style>
