@@ -68,9 +68,6 @@ import MessagingTemplate from "./pages/storeadminpages/MessagingTemplate";
 import AddWarehouse from "./pages/storeadminpages/AddWarehouse";
 import WarehouseList from "./pages/storeadminpages/WarehouseList";
 import NewQuotation from "./pages/storeadminpages/NewQuotation";
-import QuotationList from "./pages/storeadminpages/QuotationList";
-import CurrencyList from "./pages/storeadminpages/CurrencyList";
-import SMTP from "./pages/storeadminpages/SMTP";
 
 export default function Router() {
   return (
@@ -134,8 +131,7 @@ export default function Router() {
           <Route path="customercouponlist" element={<CustomerCouponList />} />
           <Route path="createcoupon" element={<CreateCoupon />} />
           <Route path="CouponsMaster" element={<CouponsMaster />} />
-          <Route path="newquotation" element={<NewQuotation />} />
-          <Route path="quotationlist" element={<QuotationList />} />
+          <Route path= "newquotation" element={<NewQuotation />} />
           <Route path="newpurchase" element={<NewPurchase />} />
           <Route path="purchaselist" element={<PurchaseList />} />
           <Route path="purchasereturnlist" element={<PurchaseReturnList />} />

@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import DataTable from "/Users/Gaurav/OneDrive/Desktop/test/src/components/DataTable"; // ✅ your reusable DataTable
+import DataTable from "../../components/DataTable";
 
 export default function Users() {
   const [view, setView] = useState("list");
