@@ -1,5 +1,6 @@
 import React from "react";
 import DataTable from "../../components/DataTable";
+import { useNavigate } from "react-router-dom";
 
 const quotationData = [
   {
@@ -61,6 +62,11 @@ const columns = [
 const QuotationList = () => {
   const handleEdit = (row) => alert(`Edit ${row.quotationCode}`);
   const handleDelete = (row) => alert(`Delete ${row.quotationCode}`);
+  const navigate = useNavigate();
+
+  const handelQuatation = (path) => {
+    navigate(path);
+  };
 
   return (
     <div className="p-6 space-y-6">
@@ -72,7 +78,9 @@ const QuotationList = () => {
         showSearch={true}
         showPagination={true}
         addButtonText="Add Quotation"
-        onAdd={() => {}}
+        onAdd={() => {
+          handelQuatation("/store/newquotation");
+        }}
         onEdit={handleEdit}
         onDelete={handleDelete}
       />

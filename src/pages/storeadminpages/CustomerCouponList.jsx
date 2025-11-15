@@ -1,5 +1,6 @@
 import React from "react";
 import DataTable from "../../components/DataTable";
+import { useNavigate } from "react-router-dom";
 
 const columns = [
   { header: "Customer Name", key: "customerName" },
@@ -29,6 +30,10 @@ const coupons = [
 const CustomerCouponList = () => {
   const handleEdit = (row) => alert(`Edit ${row.couponCode}`);
   const handleDelete = (row) => alert(`Delete ${row.couponCode}`);
+  const navigate = useNavigate();
+  const handelCutomerCoupon = (path) => {
+    navigate(path);
+  };
 
   return (
     <div className="p-6 space-y-6">
@@ -42,7 +47,9 @@ const CustomerCouponList = () => {
         showSearch={true}
         showPagination={true}
         addButtonText="Add Coupon"
-        onAdd={() => {}}
+        onAdd={() => {
+          handelCutomerCoupon("/store/createcustomercoupon");
+        }}
         onEdit={handleEdit}
         onDelete={handleDelete}
       />

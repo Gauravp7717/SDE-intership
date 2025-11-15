@@ -1,5 +1,6 @@
 import React from "react";
 import DataTable from "../../components/DataTable";
+import { useNavigate } from "react-router-dom";
 
 const advancePayments = [
   {
@@ -56,6 +57,11 @@ const AdvanceList = () => {
     alert(`Delete ${row.id}`);
   };
 
+  const navigate = useNavigate();
+  const handeladdAdvance = (path) => {
+    navigate(path);
+  };
+
   return (
     <div className="p-6 space-y-6">
       <h2 className="text-xl font-bold mb-6 text-gray-800">
@@ -68,7 +74,9 @@ const AdvanceList = () => {
         showSearch={true}
         showPagination={true}
         addButtonText="Add Advance Payment"
-        onAdd={() => {}}
+        onAdd={() => {
+          handeladdAdvance("/store/addadvance");
+        }}
         onEdit={handleEdit}
         onDelete={handleDelete}
       />

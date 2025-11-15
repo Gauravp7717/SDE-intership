@@ -136,7 +136,7 @@ export default function Users() {
           view === "create" ? "blur-sm pointer-events-none" : ""
         }`}
       >
-        <h2 className="text-2xl font-bold text-gray-800 mb-4">Users List</h2>
+        <h2 className="text-2xl font-bold text-gray-800 mb-4">User List</h2>
 
         {/* ✅ Reusable DataTable */}
         <DataTable

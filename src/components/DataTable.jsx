@@ -42,9 +42,15 @@ export default function DataTable({
   return (
     <div className="bg-white ">
       {/* Header */}
-      {showFilter && (
+      {/* Header Controls (Filter + Add Button, independently controlled) */}
+      {(showFilter || onAdd) && (
         <div className="flex gap-3 items-center justify-between p-4 border-b border-gray-200">
-          <Filter className="flex-1 min-w-0" fields={filterFields} />
+          {/* ✅ Show Filter only if enabled */}
+          {showFilter && (
+            <Filter className="flex-1 min-w-0" fields={filterFields} />
+          )}
+
+          {/* ✅ Show Add Button only if onAdd is provided */}
           {onAdd && (
             <button
               onClick={onAdd}
@@ -55,6 +61,7 @@ export default function DataTable({
           )}
         </div>
       )}
+
       {/* Controls */}
       <div className="flex justify-between items-center p-4 border-b border-gray-200">
         <div className="flex items-center gap-2 text-sm">

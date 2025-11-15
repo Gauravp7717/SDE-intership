@@ -1,5 +1,6 @@
 import React from "react";
 import DataTable from "../../components/DataTable";
+import { useNavigate } from "react-router-dom";
 
 const accounts = [
   {
@@ -67,6 +68,10 @@ const columns = [
 const AccountList = () => {
   const handleEdit = (row) => alert(`Edit ${row.code}`);
   const handleDelete = (row) => alert(`Delete ${row.code}`);
+  const navigate = useNavigate();
+  const handleadd = (path) => {
+    navigate(path);
+  };
 
   return (
     <div className="p-6 space-y-6">
@@ -78,7 +83,7 @@ const AccountList = () => {
         showSearch={true}
         showPagination={true}
         addButtonText="Add Account"
-        onAdd={() => {}}
+        onAdd={() => handleadd("/store/addaccount")}
         onEdit={handleEdit}
         onDelete={handleDelete}
       />

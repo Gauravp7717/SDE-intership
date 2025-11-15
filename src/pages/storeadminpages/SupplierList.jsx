@@ -1,5 +1,6 @@
 import React from "react";
 import DataTable from "../../components/DataTable";
+import { useNavigate } from "react-router-dom";
 
 const suppliers = [
   {
@@ -141,6 +142,10 @@ const columns = [
 ];
 
 const SupplierList = () => {
+  const navigate = useNavigate();
+  const handeladdSupplier = (path) => {
+    navigate(path);
+  };
   return (
     <div className="p-6 space-y-6">
       <h2 className="text-xl font-bold mb-6 text-gray-800">Suppliers List</h2>
@@ -151,7 +156,9 @@ const SupplierList = () => {
         showSearch={true}
         showPagination={true}
         addButtonText="Add Supplier"
-        onAdd={() => {}}
+        onAdd={() => {
+          handeladdSupplier("/store/addsupplier");
+        }}
       />
     </div>
   );
