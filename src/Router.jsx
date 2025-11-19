@@ -78,6 +78,16 @@ export default function Router() {
         {/* 🌐 Public Route */}
         <Route path="/" element={<Login />} />
 
+         {/* POS OUTSIDE layout */}
+      <Route
+        path="/store/pos"
+        element={
+        <ProtectedRoute role="storeadmin">
+        <Pos/>
+        </ProtectedRoute>
+         }
+         />
+
         {/* ✅ SUPER ADMIN ROUTES */}
         <Route
           path="/app"
@@ -113,7 +123,6 @@ export default function Router() {
           <Route path="dashboard" element={<StoreDashboard />} />
           <Route path="userlist" element={<Users />} />
           <Route path="roleslist" element={<RolesList />} />
-          <Route path="pos" element={<Pos />} />
           <Route path="addsales" element={<AddSales />} />
           <Route path="saleslist" element={<SalesList />} />
           <Route path="salespayment" element={<SalesPayment />} />
@@ -170,8 +179,10 @@ export default function Router() {
           <Route path="changepass" element={<ChangePass />} />
           <Route path="smsapi" element={<SmsApi />} />
           <Route path="smtp" element={<SMTP />} />
+
           <Route path="storetab" element={<StoreTab />} />
           <Route path="currencylist" element={<CurrencyList />} />
+
         </Route>
 
         {/* 🚧 Fallback route */}

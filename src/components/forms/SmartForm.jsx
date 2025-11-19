@@ -1,14 +1,7 @@
 import React, { useState } from "react";
 import FormField from "./formField";
+import { useRef, useEffect } from "react";
 
-/**
- * props:
- * - title, icon (ReactNode)
- * - fields: [{ name, label, type, required, placeholder, options, default, cols }]
- * - initialValues (optional)
- * - onSubmit(formData)
- * - submitLabel (optional)
- */
 export default function SmartForm({
   title,
   icon,
@@ -19,6 +12,17 @@ export default function SmartForm({
   resetOnSubmit = false,
   showButtons = true,
 }) {
+  //scroll to top on mount
+  const formRef = useRef(null);
+
+  useEffect(() => {
+    if (formRef.current) {
+      formRef.current.scrollTo({
+        top: 0,
+        behavior: "auto",
+      });
+    }
+  }, []);
   // initialize state from fields + initialValues
   const init = fields.reduce((acc, f) => {
     acc[f.name] =
@@ -70,7 +74,7 @@ export default function SmartForm({
   };
 
   return (
-    <div className="bg-white p-6 rounded-2xl shadow-xl border border-gray-100">
+    <div className="bg-white p-6 ">
       {title && (
         <div className="flex items-center gap-3 mb-6">
           {icon && <div className="text-blue-600">{icon}</div>}
