@@ -59,8 +59,18 @@ export default function Sidebar() {
   };
 
   return (
-    <motion.aside className="w-64 bg-white shadow-lg flex flex-col border-r border-gray-200">
-      <nav className="flex-1 overflow-y-auto py-4">
+    <motion.aside
+      className="
+    fixed left-0 top-[64px]        
+    w-64 h-[calc(100vh-64px)]        
+    bg-white shadow-lg border-r border-gray-200
+    flex flex-col
+    z-40
+    overflow-y-auto
+    overflow-x-hidden
+  "
+    >
+      <nav className="flex-1 overflow-hidden overflow-y-auto py-4 ">
         {/* ✅ Main Navigation */}
         {menuItems.map((item) => (
           <NavLink

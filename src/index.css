@@ -9,3 +9,24 @@
 }
 @import "tailwindcss";
 /* ./src/index.css (Below the @import and above the @tailwind directives) */
+
+/* In your main stylesheet file (where Tailwind is imported) */
+
+.sidebar-hidden-scroll {
+  /* 1. Ensure content can scroll */
+  overflow-y: scroll !important;
+  
+  /* 2. HIDE SCROLLBAR IN FIREFOX */
+  scrollbar-width: none !important;
+  
+  /* 3. HIDE SCROLLBAR IN INTERNET EXPLORER/EDGE LEGACY */
+  -ms-overflow-style: none !important;
+}
+
+/* 4. HIDE SCROLLBAR IN WEBKIT (Chrome, Safari, new Edge) */
+.sidebar-hidden-scroll::-webkit-scrollbar {
+  width: 0 !important;
+  height: 0 !important;
+  display: none !important;
+}
+
