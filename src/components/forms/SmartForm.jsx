@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import FormField from "./formField";
 
-
-
 /**
  * props:
  * - title, icon (ReactNode)
@@ -23,7 +21,10 @@ export default function SmartForm({
 }) {
   // initialize state from fields + initialValues
   const init = fields.reduce((acc, f) => {
-    acc[f.name] = initialValues[f.name] ?? f.default ?? (f.type === "checkbox" ? false : "");
+    acc[f.name] =
+      initialValues[f.name] ??
+      f.default ??
+      (f.type === "checkbox" ? false : "");
     return acc;
   }, {});
   const [formData, setFormData] = useState(init);
@@ -41,7 +42,8 @@ export default function SmartForm({
         if (f.type === "file") {
           if (!formData[f.name]) newErrors[f.name] = "Required";
         } else {
-          if (!formData[f.name] && formData[f.name] !== 0) newErrors[f.name] = "Required";
+          if (!formData[f.name] && formData[f.name] !== 0)
+            newErrors[f.name] = "Required";
         }
       }
       if (!newErrors[f.name] && f.validate) {
@@ -80,13 +82,21 @@ export default function SmartForm({
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {fields.map((field) => (
             <div key={field.name}>
-              <FormField field={field} value={formData[field.name]} onChange={handleChange} />
-              {errors[field.name] && <p className="text-xs text-red-500 mt-1">{errors[field.name]}</p>}
+              <FormField
+                field={field}
+                value={formData[field.name]}
+                onChange={handleChange}
+              />
+              {errors[field.name] && (
+                <p className="text-xs text-red-500 mt-1">
+                  {errors[field.name]}
+                </p>
+              )}
             </div>
           ))}
         </div>
-      
-         {/* ✅ Conditionally render buttons */}
+
+        {/* ✅ Conditionally render buttons */}
         {showButtons && (
           <div className="flex justify-end gap-4 mt-6">
             <button
