@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import DataTable from "../components/DataTable"; // Import the reusable component
+import DataTable from "../../components/DataTable"; // Import the reusable component
 
 export default function TaxlistSection() {
   const [showNewUnitForm, setShowNewUnitForm] = useState(false);
@@ -120,25 +120,21 @@ export default function TaxlistSection() {
   return (
     <div className="p-6 min-h-screen">
       {showNewUnitForm && (
-        <motion.div
+        <div
           className="fixed inset-0 bg-black/40 backdrop-blur-sm bg-opacity-50 flex items-center justify-center z-50"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
+          onClick={handleClose}
         >
-          <motion.div
+          <div
             ref={modalRef}
             className="p-6 bg-white rounded-2xl shadow-lg max-w-2xl mx-auto w-[90%] sm:w-[80%] md:w-[60%] lg:w-[50%]"
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
             onClick={(e) => e.stopPropagation()}
           >
-            <motion.h2 className="text-xl font-bold mb-6 text-gray-800 text-center">
+            <h2 className="text-xl font-bold mb-6 text-gray-800 text-center">
               {viewMode === "list"
                 ? "Add / Update Tax"
                 : "Add / Update Tax Group"}
-            </motion.h2>
+            </h2>
+
             <div className="space-y-5">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -153,6 +149,7 @@ export default function TaxlistSection() {
                   placeholder="Enter name"
                 />
               </div>
+
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Total Tax Percentage <span className="text-red-500">*</span>
@@ -167,6 +164,7 @@ export default function TaxlistSection() {
                 />
               </div>
             </div>
+
             <div className="flex flex-col sm:flex-row sm:space-x-4 mt-8 justify-center space-y-3 sm:space-y-0">
               <button
                 onClick={handleSave}
@@ -181,9 +179,10 @@ export default function TaxlistSection() {
                 Close
               </button>
             </div>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       )}
+
       <h2 className="text-2xl font-bold text-gray-800 mb-4">Tax List</h2>
 
       {/* Header & Toggle */}

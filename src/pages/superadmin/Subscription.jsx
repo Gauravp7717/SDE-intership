@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import DataTable from "../components/DataTable"; // adjust import path as needed
+import DataTable from "../../components/DataTable"; // adjust import path as needed
 
 const Subscription = () => {
   const [activePage, setActivePage] = useState("list");

@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import DataTable from "../components/DataTable"; // ✅ Reusable component
+import DataTable from "../../components/DataTable"; // ✅ Reusable component
 
 const UsersSection = () => {
   const [showModal, setShowModal] = useState(false); // ✅ for onAdd trigger

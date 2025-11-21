@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import DataTable from "../components/DataTable"; // ✅ Import your reusable DataTable
+import DataTable from "../../components/DataTable"; // ✅ Import your reusable DataTable
 
 const PlansSection = () => {
   const [showModal, setShowModal] = useState(false);

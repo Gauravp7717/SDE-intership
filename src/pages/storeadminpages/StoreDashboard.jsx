@@ -353,11 +353,6 @@ export default function StoreAdminDashboard() {
           entriesPerPage={10}
           showSearch={true}
           showPagination={true}
-          addButtonText="Add Item"
-          onAdd={() => {}}
-          // Optionally include onEdit and onDelete
-          // onEdit={row => alert("Edit " + row.code)}
-          // onDelete={row => alert("Delete " + row.code)}
         />
       </div>
 
