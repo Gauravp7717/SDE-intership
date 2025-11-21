@@ -1,5 +1,6 @@
 import React from "react";
 import DataTable from "../../components/DataTable"; // adjust import as needed
+import { useNavigate } from "react-router-dom";
 
 const categories = [
   {
@@ -47,6 +48,10 @@ const columns = [
 const ExpenseCategoriesList = () => {
   const handleEdit = (row) => alert(`Edit category ${row.categoryName}`);
   const handleDelete = (row) => alert(`Delete category ${row.categoryName}`);
+  const navigate = useNavigate();
+  const handeladd = (path) => {
+    navigate(path);
+  };
 
   return (
     <div className="p-6 space-y-6">
@@ -60,7 +65,9 @@ const ExpenseCategoriesList = () => {
         showSearch={true}
         showPagination={true}
         addButtonText="Add Category"
-        onAdd={() => {}}
+        onAdd={() => {
+          handeladd("/store/addexpencecategory");
+        }}
         onEdit={handleEdit}
         onDelete={handleDelete}
       />

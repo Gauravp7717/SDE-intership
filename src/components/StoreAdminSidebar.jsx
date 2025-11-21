@@ -302,7 +302,7 @@ export default function StoreAdminSidebar() {
         },
         {
           name: "Site Settings",
-          path: "/store/warehouselist",
+          path: "/store/SiteSetting",
           icon: List,
         },
         {

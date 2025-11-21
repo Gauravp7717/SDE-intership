@@ -1,5 +1,6 @@
 import React from "react";
 import DataTable from "../../components/DataTable";
+import { useNavigate } from "react-router-dom";
 
 const variants = [
   {
@@ -52,6 +53,10 @@ const columns = [
 const VariantList = () => {
   const handleEdit = (row) => alert(`Edit ${row.variantName}`);
   const handleDelete = (row) => alert(`Delete ${row.variantName}`);
+  const navigate = useNavigate();
+  const handeladd = (path) => {
+    navigate(path);
+  };
 
   return (
     <div className="p-6 space-y-6">
@@ -63,7 +68,9 @@ const VariantList = () => {
         showSearch={true}
         showPagination={true}
         addButtonText="Add Variant"
-        onAdd={() => {}}
+        onAdd={() => {
+          handeladd("/store/addvariant");
+        }}
         onEdit={handleEdit}
         onDelete={handleDelete}
       />

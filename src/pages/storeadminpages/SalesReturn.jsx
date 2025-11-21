@@ -1,9 +1,11 @@
 import React, { useState, useRef } from "react";
 import DataTable from "../../components/DataTable";
 import InvoiceStatsCards from "../../components/InvoiceStatsCards";
+import { useNavigate } from "react-router-dom";
 
 const SalesReturn = () => {
   const [activePage, setActivePage] = useState("list");
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     orgId: "",
@@ -243,6 +245,10 @@ const SalesReturn = () => {
     console.log("Delete clicked:", sale);
   };
 
+  const handeladd = (path) => {
+    navigate(path);
+  };
+
   return (
     <div className="p-6 space-y-6">
       <InvoiceStatsCards />
@@ -255,7 +261,7 @@ const SalesReturn = () => {
         filterFields={["warehouse"]}
         showFilter={true}
         addButtonText="New Sale"
-        onAdd={() => setActivePage("create")}
+        onAdd={() => handeladd("/store/salesreturnform")}
         modalRef={modalRef}
       />
     </div>

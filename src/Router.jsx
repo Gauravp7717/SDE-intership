@@ -71,6 +71,20 @@ import SMTP from "./pages/storeadminpages/SMTP";
 import CurrencyList from "./pages/storeadminpages/CurrencyList";
 import QuotationList from "./pages/storeadminpages/QuotationList";
 import LoginSignup from "./components/common/Login";
+import SalesReturnForm from "./pages/storeadminpages/SalesReturnForm";
+import PurchaseReturnForm from "./pages/storeadminpages/PurchaseReturnForm";
+import MoneyTransferForm from "./pages/storeadminpages/MoneyTransferForm";
+import DepositeForm from "./pages/storeadminpages/DepositeForm";
+import AddCategory from "./pages/storeadminpages/AddCategory";
+import AddBrand from "./pages/storeadminpages/AddBrand";
+import AddVariant from "./pages/storeadminpages/AddVariant";
+import AddAdjustment from "./pages/storeadminpages/AddAdjustment";
+import AddTransfer from "./pages/storeadminpages/AddTransfer";
+import AddExpence from "./pages/storeadminpages/AddExpence";
+import AddExpenceCategory from "./pages/storeadminpages/AddExpenceCategory";
+import AddCountry from "./pages/storeadminpages/AddCountry";
+import AddState from "./pages/storeadminpages/AddState";
+import SiteSetting from "./pages/storeadminpages/SiteSetting";
 
 export default function Router() {
   return (
@@ -161,7 +175,8 @@ export default function Router() {
           <Route path="categorieslist" element={<CategoriesList />} />
           <Route path="brandlist" element={<BrandList />} />
           <Route path="variantlist" element={<VariantList />} />
-
+          <Route path="salesreturnform" element={<SalesReturnForm />} />
+          <Route path="purchasereturnform" element={<PurchaseReturnForm />} />
           <Route path="printvariables" element={<PrintVariable />} />
           <Route path="importitem" element={<ImportItem />} />
           <Route path="importservices" element={<ImportServices />} />
@@ -173,6 +188,17 @@ export default function Router() {
             element={<ExpenseCategoriesList />}
           />
           <Route path="countrieslist" element={<CountriesList />} />
+          <Route path="moneytransferform" element={<MoneyTransferForm />} />
+          <Route path="depositeform" element={<DepositeForm />} />
+          <Route path="addcategory" element={<AddCategory />} />
+          <Route path="addbrand" element={<AddBrand />} />
+          <Route path="addadjustment" element={<AddAdjustment />} />
+          <Route path="addtransfer" element={<AddTransfer />} />
+          <Route path="addcountry" element={<AddCountry />} />
+          <Route path="addstate" element={<AddState />} />
+          <Route path="addexpence" element={<AddExpence />} />
+          <Route path="addexpencecategory" element={<AddExpenceCategory />} />
+          <Route path="addvariant" element={<AddVariant />} />
           <Route path="statelist" element={<StateList />} />
           <Route path="sendmessage" element={<SendMessage />} />
           <Route path="messagingtemplate" element={<MessagingTemplate />} />
@@ -186,6 +212,9 @@ export default function Router() {
           <Route path="taxlist" element={<TaxlistSection />} />
           <Route path="storetab" element={<StoreTab />} />
           <Route path="currencylist" element={<CurrencyList />} />
+          <Route path="sitesetting" element={<SiteSetting />} />
+          <Route path="taxlist" element={<TaxlistSection />} />
+          <Route path="unitslist" element={<UnitListSection />} />
         </Route>
 
         {/* 🚧 Fallback route */}

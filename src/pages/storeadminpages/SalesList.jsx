@@ -1,8 +1,10 @@
 import React, { useState, useRef } from "react";
 import InvoiceStatsCards from "../../components/InvoiceStatsCards";
 import DataTable from "../../components/DataTable";
+import { useNavigate } from "react-router-dom";
 
 const SalesList = () => {
+  const navigate = useNavigate();
   const [activePage, setActivePage] = useState("list");
   const [formData, setFormData] = useState({
     name: "",
@@ -182,6 +184,10 @@ const SalesList = () => {
     console.log("Delete clicked:", sale);
   };
 
+  const handeladd = (path) => {
+    navigate(path);
+  };
+
   return (
     <div className="p-6 space-y-6">
       {/* Stats cards */}
@@ -196,7 +202,7 @@ const SalesList = () => {
         onDelete={handleDelete}
         showFilter={true}
         addButtonText="New Sale"
-        onAdd={() => setActivePage("create")}
+        onAdd={() => handeladd("/store/addsales")}
       />
     </div>
   );

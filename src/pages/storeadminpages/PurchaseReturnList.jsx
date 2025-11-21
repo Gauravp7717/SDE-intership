@@ -110,7 +110,7 @@ const PurchaseReturnList = () => {
         showPagination={true}
         addButtonText="Add Purchase Return"
         onAdd={() => {
-          handelnav("/store/newpurchase");
+          handelnav("/store/purchasereturnform");
         }}
         onEdit={handleEdit}
         onDelete={handleDelete}

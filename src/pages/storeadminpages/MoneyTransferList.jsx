@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import DataTable from "../../components/DataTable";
 import Filter from "../../components/Filter"; // adjust import if needed
+import { useNavigate } from "react-router-dom";
 
 const transfers = [
   {
@@ -55,6 +56,11 @@ const MoneyTransferList = () => {
   // Handler for filter changes
   const handleFilterChange = (changedFilter) => setFilter(changedFilter);
 
+  const navigate = useNavigate();
+  const handeladd = (path) => {
+    navigate(path);
+  };
+
   return (
     <div className="p-6 space-y-6">
       <h2 className="text-xl font-bold mb-6 text-gray-800">
@@ -73,7 +79,9 @@ const MoneyTransferList = () => {
         showSearch={true}
         showPagination={true}
         addButtonText="Add Money Transfer"
-        onAdd={() => {}}
+        onAdd={() => {
+          handeladd("/store/moneytransferform");
+        }}
         onEdit={handleEdit}
         onDelete={handleDelete}
       />
