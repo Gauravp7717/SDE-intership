@@ -107,7 +107,7 @@ export default function NewQuotation() {
   };
 
   return (
-    <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-8 space-y-8">
+    <div className="bg-white  border-gray-200 p-10 space-y-8">
       {/* --- Title --- */}
       <div className="flex items-center gap-3 mb-4 border-b pb-3">
         <FaFileInvoice className="text-blue-600 text-xl" />

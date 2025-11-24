@@ -125,7 +125,7 @@ export default function AddSales() {
 
   return (
     <div className="bg-gray-50 min-h-screen py-8 px-4 md:px-8">
-      <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-md border border-gray-200 p-8 space-y-8">
+      <form onSubmit={handleSubmit} className="bg-white border-gray-200 p-4 space-y-8">
         {/* Header */}
         <div className="flex items-center justify-between border-b pb-3">
           <h1 className="text-2xl font-semibold text-gray-800">Add / Update Sales</h1>

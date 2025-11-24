@@ -44,7 +44,7 @@ export default function AddSupplier() {
         </div>
 
         {/* Form Section */}
-        <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 space-y-10">
+        <div className="bg-white  border border-gray-100 p-8 space-y-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Left Side */}
             <div className="space-y-5">
@@ -147,7 +147,7 @@ export default function AddSupplier() {
         </div>
 
         {/* Opening Balance Table */}
-        <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-6">
+        <div className="bg-white  border border-gray-100 p-6">
           <h3 className="text-lg font-semibold text-blue-700 mb-3 border-b border-gray-200 pb-2">
             Opening Balance Payments
           </h3>

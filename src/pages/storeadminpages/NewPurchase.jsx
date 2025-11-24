@@ -43,7 +43,7 @@ export default function NewPurchase() {
 
   return (
     <div className="bg-gray-50 min-h-screen py-8 px-4 md:px-8">
-      <div className="bg-white rounded-2xl shadow-md border border-gray-200 p-8 space-y-10">
+      <div className="bg-white  border-gray-200 p-3 space-y-10">
         {/* Header */}
         <div className="border-b pb-4">
           <h1 className="text-2xl font-semibold text-gray-800">Add / Update Purchase</h1>

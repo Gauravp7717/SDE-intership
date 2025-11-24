@@ -70,6 +70,8 @@ import WarehouseList from "./pages/storeadminpages/WarehouseList";
 import NewQuotation from "./pages/storeadminpages/NewQuotation";
 import SMTP from "./pages/storeadminpages/SMTP";
 import CurrencyList from "./pages/storeadminpages/CurrencyList";
+import AddUserList from "./pages/storeadminpages/AddUserList";
+import AddRole from "./pages/storeadminpages/AddRole";
 
 export default function Router() {
   return (
@@ -78,15 +80,15 @@ export default function Router() {
         {/* 🌐 Public Route */}
         <Route path="/" element={<Login />} />
 
-         {/* POS OUTSIDE layout */}
-      <Route
-        path="/store/pos"
-        element={
-        <ProtectedRoute role="storeadmin">
-        <Pos/>
-        </ProtectedRoute>
-         }
-         />
+        {/* POS OUTSIDE layout */}
+        <Route
+          path="/store/pos"
+          element={
+            <ProtectedRoute role="storeadmin">
+              <Pos />
+            </ProtectedRoute>
+          }
+        />
 
         {/* ✅ SUPER ADMIN ROUTES */}
         <Route
@@ -109,7 +111,7 @@ export default function Router() {
           <Route path="paymenttypesection" element={<PaymentTypeSection />} />
           <Route path="changepass" element={<ChangePass />} />
         </Route>
-
+         
         {/* ✅ STORE ADMIN ROUTES */}
         <Route
           path="/store"
@@ -122,7 +124,9 @@ export default function Router() {
         >
           <Route path="dashboard" element={<StoreDashboard />} />
           <Route path="userlist" element={<Users />} />
+          <Route path="adduserlist" element={<AddUserList />} />
           <Route path="roleslist" element={<RolesList />} />
+          <Route path="addrole" element={<AddRole />} />
           <Route path="addsales" element={<AddSales />} />
           <Route path="saleslist" element={<SalesList />} />
           <Route path="salespayment" element={<SalesPayment />} />
@@ -182,7 +186,6 @@ export default function Router() {
 
           <Route path="storetab" element={<StoreTab />} />
           <Route path="currencylist" element={<CurrencyList />} />
-
         </Route>
 
         {/* 🚧 Fallback route */}

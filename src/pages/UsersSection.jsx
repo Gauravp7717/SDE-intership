@@ -1,8 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
-import DataTable from "../components/DataTable"; // ✅ Reusable component
+import DataTable from "../components/DataTable";
 
 const UsersSection = () => {
-  const [showModal, setShowModal] = useState(false); // ✅ for onAdd trigger
+  const [showModal, setShowModal] = useState(false);
+
   const [formData, setFormData] = useState({
     username: "",
     firstName: "",
@@ -11,15 +12,18 @@ const UsersSection = () => {
     email: "",
     password: "",
     confirmPassword: "",
-    profilePic: null,
+    profileImage: "",
   });
 
+  const [imageError, setImageError] = useState("");
+
   const modalRef = useRef(null);
+  const fileInputRef = useRef(null);
 
   // Close modal on outside click
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (modalRef.current && !modalRef.current.contains(event.target)) {
+    const handleClickOutside = (e) => {
+      if (modalRef.current && !modalRef.current.contains(e.target)) {
         handleClose();
       }
     };
@@ -27,6 +31,63 @@ const UsersSection = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [showModal]);
 
+  // Field change
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  // Image Upload with validation
+  const handleImageUpload = (file) => {
+    if (!file) return;
+
+    setImageError("");
+
+    const validTypes = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
+    const maxSizeMB = 2;
+
+    if (!validTypes.includes(file.type)) {
+      setImageError("Only JPG, PNG or WEBP allowed.");
+      return;
+    }
+
+    if (file.size / 1024 / 1024 > maxSizeMB) {
+      setImageError("Image must be less than 2MB.");
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setFormData({ ...formData, profileImage: reader.result });
+    };
+    reader.readAsDataURL(file);
+  };
+
+  // Submit Form
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    alert("User created successfully!");
+    handleClose();
+  };
+
+  // Reset form + close modal
+  const handleClose = () => {
+    setFormData({
+      username: "",
+      firstName: "",
+      lastName: "",
+      mobile: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+      profileImage: "",
+    });
+    setImageError("");
+    setShowModal(false);
+  };
+
+  // Dummy user list
   const users = [
     {
       id: 1,
@@ -74,48 +135,22 @@ const UsersSection = () => {
     },
   ];
 
-  const handleChange = (e) => {
-    const { name, value, files } = e.target;
-    setFormData({ ...formData, [name]: files ? files[0] : value });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    alert("New user created successfully!");
-    handleClose();
-  };
-
-  const handleClose = () => {
-    setFormData({
-      username: "",
-      firstName: "",
-      lastName: "",
-      mobile: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
-      profilePic: null,
-    });
-    setShowModal(false);
-  };
-
-  // ✅ Columns for reusable DataTable
+  // DataTable Columns
   const columns = [
-    { header: "Sr.", key: "id", render: (_, row, i) => i + 1, width: "w-1/12" },
-    { header: "Store", key: "store", width: "w-2/12" },
-    { header: "Username", key: "username", width: "w-2/12" },
-    { header: "Name", key: "name", width: "w-2/12" },
-    { header: "Email", key: "email", width: "w-3/12" },
-    { header: "Tenant", key: "tenant", width: "w-2/12" },
-    { header: "Role", key: "role", width: "w-2/12" },
-    { header: "Created on", key: "createdOn", width: "w-2/12" },
+    { header: "Sr.", key: "id", render: (_, __, i) => i + 1 },
+    { header: "Store", key: "store" },
+    { header: "Username", key: "username" },
+    { header: "Name", key: "name" },
+    { header: "Email", key: "email" },
+    { header: "Tenant", key: "tenant" },
+    { header: "Role", key: "role" },
+    { header: "Created on", key: "createdOn" },
     {
       header: "Status",
       key: "status",
-      width: "w-1/12",
       render: (val) => (
         <span
-          className={`inline-flex items-center px-3 py-0.5 rounded-full text-xs font-medium ${
+          className={`px-3 py-1 rounded-full text-xs font-medium ${
             val === "Active"
               ? "bg-green-100 text-green-700"
               : "bg-red-100 text-red-700"
@@ -128,46 +163,13 @@ const UsersSection = () => {
     {
       header: "Action",
       key: "actions",
-      width: "w-1/12",
       render: () => (
-        <div className="flex justify-center space-x-1">
-          <button
-            className="text-gray-500 hover:text-blue-500 p-1"
-            title="Edit"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-4 w-4"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
-              />
-            </svg>
+        <div className="flex justify-center gap-2">
+          <button className="text-blue-500 hover:scale-110 transition">
+            ✏️
           </button>
-          <button
-            className="text-gray-500 hover:text-red-500 p-1"
-            title="Delete"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-4 w-4"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-              />
-            </svg>
+          <button className="text-red-500 hover:scale-110 transition">
+            🗑️
           </button>
         </div>
       ),
@@ -176,9 +178,10 @@ const UsersSection = () => {
 
   return (
     <div className="p-6 min-h-screen relative">
+      {/* Blur background when modal open */}
       <div className={`${showModal ? "blur-sm pointer-events-none" : ""}`}>
-        <h2 className="text-2xl font-bold text-gray-800 mb-4">User List</h2>
-        {/* ✅ Using Reusable DataTable */}
+        <h2 className="text-2xl font-bold mb-4">User List</h2>
+
         <DataTable
           columns={columns}
           data={users}
@@ -186,69 +189,143 @@ const UsersSection = () => {
           showSearch={true}
           showPagination={true}
           addButtonText="Create User"
-          onAdd={() => setShowModal(true)} // ✅ onAdd opens modal
+          onAdd={() => setShowModal(true)}
         />
       </div>
 
-      {/* ✅ Modal for Create User */}
+      {/* Modal */}
       {showModal && (
-        <div className="fixed inset-0 flex items-center justify-center z-50 backdrop-blur-sm bg-gray-100/50">
+        <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50">
           <form
             ref={modalRef}
             onSubmit={handleSubmit}
-            className="bg-white p-6 rounded-lg shadow-lg w-full max-w-2xl"
+            className="bg-white p-6 w-full max-w-2xl rounded-xl shadow-xl animate-fadeIn"
           >
+            {/* Header */}
             <h2 className="text-xl font-semibold border-b pb-2 mb-4">
-              Create User{" "}
-              <span className="text-gray-500 text-sm">Enter User Details</span>
+              Create User
+              <span className="text-gray-500 text-sm ml-2">
+                Enter User Details
+              </span>
             </h2>
 
-            <div className="grid grid-cols-2 gap-4">
+            {/* Fields Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {[
-                "username",
-                "firstName",
-                "lastName",
-                "mobile",
-                "email",
-                "password",
-                "confirmPassword",
-              ].map((name) => (
-                <div key={name} className="flex flex-col">
-                  <label className="text-gray-700 font-semibold capitalize">
-                    {name.replace(/([A-Z])/g, " $1").trim()}
-                    <span className="text-red-500">*</span>
+                { name: "username", label: "Username" },
+                { name: "firstName", label: "First Name" },
+                { name: "lastName", label: "Last Name" },
+                { name: "mobile", label: "Mobile", type: "tel" },
+                { name: "email", label: "Email", type: "email" },
+                { name: "password", label: "Password", type: "password" },
+                {
+                  name: "confirmPassword",
+                  label: "Confirm Password",
+                  type: "password",
+                },
+              ].map(({ name, label, type }) => (
+                <div key={name} className="flex flex-col gap-1">
+                  <label className="font-medium">
+                    {label} <span className="text-red-500">*</span>
                   </label>
                   <input
-                    type={
-                      name.includes("password")
-                        ? "password"
-                        : name === "email"
-                        ? "email"
-                        : name === "mobile"
-                        ? "tel"
-                        : "text"
-                    }
+                    type={type || "text"}
                     name={name}
-                    value={formData[name] || ""}
+                    value={formData[name]}
                     onChange={handleChange}
-                    className="border border-gray-300 rounded-md p-2"
                     required
+                    className="border border-gray-300 p-2 rounded focus:ring-2 focus:ring-blue-400 outline-none"
                   />
                 </div>
               ))}
             </div>
 
-            <div className="flex justify-end gap-4 pt-4">
+            {/* Profile Picture Uploader */}
+            <div className="mt-4 flex flex-col items-edge gap-2">
+              <label className="font-medium mb-2">Profile Image</label>
+
+              <div className="relative w-28 h-28">
+                {/* Circle Preview */}
+                <div
+                  className="w-28 h-28 rounded-full overflow-hidden border shadow bg-gray-200 cursor-pointer flex items-center justify-center"
+                  onClick={() => fileInputRef.current.click()}
+                  onDragOver={(e) => e.preventDefault()}
+                  onDrop={(e) => {
+                    e.preventDefault();
+                    handleImageUpload(e.dataTransfer.files[0]);
+                  }}
+                >
+                  {formData.profileImage ? (
+                    <img
+                      src={formData.profileImage}
+                      alt="preview"
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <span className="text-gray-500 text-sm">No Image</span>
+                  )}
+                </div>
+
+                {/* Camera Icon */}
+                <div
+                  className="absolute bottom-1 right-1 bg-black/60 p-2 rounded-full cursor-pointer hover:bg-black/80"
+                  onClick={() => fileInputRef.current.click()}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="w-4 h-4 text-white"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M3 7h2l2-3h10l2 3h2v12H3V7zm9 3a4 4 0 100 8 4 4 0 000-8z"
+                    />
+                  </svg>
+                </div>
+              </div>
+
+              {/* Hidden input */}
+              <input
+                type="file"
+                accept="image/*"
+                ref={fileInputRef}
+                className="hidden"
+                onChange={(e) => handleImageUpload(e.target.files[0])}
+              />
+
+              {/* Remove */}
+              {formData.profileImage && (
+                <button
+                  type="button"
+                  className="text-red-600 underline text-sm mt-2"
+                  onClick={() => setFormData({ ...formData, profileImage: "" })}
+                >
+                  Remove Photo
+                </button>
+              )}
+
+              {imageError && (
+                <p className="text-red-500 text-sm mt-2">{imageError}</p>
+              )}
+            </div>
+
+            {/* Buttons */}
+            <div className="flex justify-end gap-4 pt-6">
               <button
                 type="submit"
                 className="bg-green-600 text-white px-6 py-2 rounded hover:bg-green-700"
               >
                 Save
               </button>
+
               <button
                 type="button"
-                onClick={handleClose}
                 className="bg-yellow-500 text-white px-6 py-2 rounded hover:bg-yellow-600"
+                onClick={handleClose}
               >
                 Close
               </button>

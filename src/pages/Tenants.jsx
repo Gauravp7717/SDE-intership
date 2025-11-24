@@ -156,7 +156,7 @@ const Tenants = () => {
 
       {/* ✅ Popup Modal */}
       {view === "create" && (
-        <div className="fixed inset-0 flex items-center justify-center z-50 backdrop-blur-sm bg-gray-100/50">
+        <div className="fixed inset-0 flex items-center justify-center z-50 backdrop-blur-sm bg-black/40">
           <div
             ref={modalRef}
             className="bg-white p-6 rounded-lg shadow-lg w-full max-w-lg relative"
