@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import DataTable from "../../components/DataTable"; // adjust path as needed
+import { useNavigate } from "react-router-dom";
 
 const adjustments = [
   {
@@ -46,6 +47,10 @@ const AdjustmentList = () => {
 
   const handleEdit = (row) => alert(`Edit adjustment by ${row.createdBy}`);
   const handleDelete = (row) => alert(`Delete adjustment by ${row.createdBy}`);
+  const navigate = useNavigate();
+  const handeladd = (path) => {
+    navigate(path);
+  };
 
   return (
     <div className="p-6 space-y-6">
@@ -76,7 +81,9 @@ const AdjustmentList = () => {
         showSearch={true}
         showPagination={true}
         addButtonText="Add Adjustment"
-        onAdd={() => {}}
+        onAdd={() => {
+          handeladd("/store/addadjustment");
+        }}
         onEdit={handleEdit}
         onDelete={handleDelete}
       />

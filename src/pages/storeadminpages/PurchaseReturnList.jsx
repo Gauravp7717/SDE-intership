@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import DataTable from "../../components/DataTable";
 import InvoiceStatsCards from "../../components/InvoiceStatsCards";
+import { useNavigate } from "react-router-dom";
 
 const purchaseReturns = [
   {
@@ -72,6 +73,11 @@ const PurchaseReturnList = () => {
 
   const handleEdit = (row) => alert(`Edit ${row.returnCode}`);
   const handleDelete = (row) => alert(`Delete ${row.returnCode}`);
+  const navigate = useNavigate();
+
+  const handelnav = (path) => {
+    navigate(path);
+  };
 
   return (
     <div className="p-6 space-y-6">
@@ -103,7 +109,9 @@ const PurchaseReturnList = () => {
         showSearch={true}
         showPagination={true}
         addButtonText="Add Purchase Return"
-        onAdd={() => {}}
+        onAdd={() => {
+          handelnav("/store/purchasereturnform");
+        }}
         onEdit={handleEdit}
         onDelete={handleDelete}
       />

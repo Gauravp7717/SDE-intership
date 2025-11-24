@@ -1,5 +1,6 @@
 import React from "react";
 import DataTable from "../../components/DataTable"; // adjust import path as needed
+import { useNavigate } from "react-router-dom";
 
 const transfers = [
   {
@@ -72,6 +73,10 @@ const columns = [
 const TransferList = () => {
   const handleEdit = (row) => alert(`Edit transfer by ${row.createdBy}`);
   const handleDelete = (row) => alert(`Delete transfer by ${row.createdBy}`);
+  const navigate = useNavigate();
+  const handeladd = (path) => {
+    navigate(path);
+  };
 
   return (
     <div className="p-6 space-y-6">
@@ -85,7 +90,9 @@ const TransferList = () => {
         showSearch={true}
         showPagination={true}
         addButtonText="Add Transfer"
-        onAdd={() => {}}
+        onAdd={() => {
+          handeladd("/store/addtransfer");
+        }}
         onEdit={handleEdit}
         onDelete={handleDelete}
       />

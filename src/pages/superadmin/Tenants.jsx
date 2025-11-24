@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import DataTable from "../components/DataTable"; // ✅ Import reusable table
+import DataTable from "../../components/DataTable"; // ✅ Import reusable table
 
 const Tenants = () => {
   const [view, setView] = useState("list");

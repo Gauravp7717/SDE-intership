@@ -165,42 +165,6 @@ const items = [
   },
 ];
 
-const columns = [
-  {
-    header: "Image",
-    key: "image",
-    render: () => <span className="w-5 h-5 bg-gray-200 inline-block rounded" />,
-  },
-  { header: "Item Code", key: "code" },
-  { header: "Item Name", key: "name" },
-  { header: "Brand", key: "brand" },
-  {
-    header: "Category / Item Type",
-    key: "category",
-    render: (value, row) => `${value} [${row.itemType}]`,
-  },
-  { header: "Unit", key: "unit" },
-  { header: "Stock", key: "stock" },
-  { header: "Alert Quantity", key: "alertQty" },
-  { header: "Sales Price", key: "salesPrice" },
-  { header: "Tax", key: "tax" },
-  {
-    header: "Status",
-    key: "status",
-    render: (value) => (
-      <span
-        className={`px-2 py-0.5 rounded-full text-xs font-medium ${
-          value === "Active"
-            ? "bg-green-100 text-green-700"
-            : "bg-red-100 text-red-700"
-        }`}
-      >
-        {value}
-      </span>
-    ),
-  },
-];
-
 const warehouseOptions = [
   "-All Warehouses-",
   "System Warehouse",
@@ -211,6 +175,75 @@ const warehouseOptions = [
 const itemTypeOptions = ["All", "Items", "Services"];
 
 const ItemList = () => {
+  const [selectedRows, setSelectedRows] = useState([]);
+
+  const toggleRow = (code) => {
+    setSelectedRows((prev) =>
+      prev.includes(code) ? prev.filter((c) => c !== code) : [...prev, code]
+    );
+  };
+
+  const handleSelectAll = (checked) => {
+    if (checked) {
+      setSelectedRows(filteredItems.map((item) => item.code));
+    } else {
+      setSelectedRows([]);
+    }
+  };
+  const columns = [
+    {
+      header: (
+        <input
+          type="checkbox"
+          onChange={(e) => handleSelectAll(e.target.checked)}
+        />
+      ),
+      key: "select",
+      render: (value, row) => (
+        <input
+          type="checkbox"
+          checked={selectedRows.includes(row.code)}
+          onChange={() => toggleRow(row.code)}
+        />
+      ),
+    },
+    {
+      header: "Image",
+      key: "image",
+      render: () => (
+        <span className="w-5 h-5 bg-gray-200 inline-block rounded" />
+      ),
+    },
+    { header: "Item Code", key: "code" },
+    { header: "Item Name", key: "name" },
+    { header: "Brand", key: "brand" },
+    {
+      header: "Category / Item Type",
+      key: "category",
+      render: (value, row) => `${value} [${row.itemType}]`,
+    },
+    { header: "Unit", key: "unit" },
+    { header: "Stock", key: "stock" },
+    { header: "Alert Quantity", key: "alertQty" },
+    { header: "Sales Price", key: "salesPrice" },
+    { header: "Tax", key: "tax" },
+    {
+      header: "Status",
+      key: "status",
+      render: (value) => (
+        <span
+          className={`px-2 py-0.5 rounded-full text-xs font-medium ${
+            value === "Active"
+              ? "bg-green-100 text-green-700"
+              : "bg-red-100 text-red-700"
+          }`}
+        >
+          {value}
+        </span>
+      ),
+    },
+  ];
+
   const [filters, setFilters] = useState({
     warehouse: "",
     itemType: "",
@@ -267,6 +300,7 @@ const ItemList = () => {
         showSearch={true}
         showPagination={true}
         addButtonText="Add Item"
+        // addButtonText="Add service"
         onAdd={() => {}}
         onEdit={() => {}}
         onDelete={() => {}}

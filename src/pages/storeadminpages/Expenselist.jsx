@@ -1,5 +1,6 @@
 import React from "react";
 import DataTable from "../../components/DataTable"; // adjust import path as needed
+import { useNavigate } from "react-router-dom";
 
 const expenses = [
   {
@@ -68,6 +69,10 @@ const columns = [
 const Expenselist = () => {
   const handleEdit = (row) => alert(`Edit expense for ${row.expenseFor}`);
   const handleDelete = (row) => alert(`Delete expense for ${row.expenseFor}`);
+  const navigate = useNavigate();
+  const handeladd = (path) => {
+    navigate(path);
+  };
 
   return (
     <div className="p-6 space-y-6">
@@ -79,7 +84,9 @@ const Expenselist = () => {
         showSearch={true}
         showPagination={true}
         addButtonText="Add Expense"
-        onAdd={() => {}}
+        onAdd={() => {
+          handeladd("/store/addexpence");
+        }}
         onEdit={handleEdit}
         onDelete={handleDelete}
       />

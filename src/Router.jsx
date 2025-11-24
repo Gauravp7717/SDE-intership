@@ -1,23 +1,22 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
-import Login from "./pages/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 // ✅ Single unified layout
 import AppLayout from "./layout/AppLayout";
 
 // Super Admin pages
-import Dashboard from "./pages/Dashboard";
-import Tenants from "./pages/Tenants";
-import PlansSection from "./pages/PlansSection";
-import Subscription from "./pages/Subscription";
-import UsersSection from "./pages/UsersSection";
-import StoreTab from "./pages/StoreTab";
-import SmsApi from "./pages/SmsApi";
-import TaxlistSection from "./pages/TaxlistSection";
-import UnitListSection from "./pages/UnitListSection";
-import PaymentTypeSection from "./pages/PaymentTypeSection";
-import ChangePass from "./pages/ChangePass";
+import Tenants from "./pages/superadmin/Tenants";
+import PlansSection from "./pages/superadmin/PlansSection";
+import Subscription from "./pages/superadmin/Subscription";
+import UsersSection from "./pages/superadmin/UsersSection";
+import StoreTab from "./pages/superadmin/StoreTab";
+import SmsApi from "./pages/superadmin/SmsApi";
+import TaxlistSection from "./pages/superadmin/TaxlistSection";
+import UnitListSection from "./pages/superadmin/UnitListSection";
+import DashboardScreen from "./pages/superadmin/Dashboard";
+import PaymentTypeSection from "./pages/superadmin/PaymentTypeSection";
+import ChangePass from "./pages/superadmin/ChangePass";
 
 // Store Admin pages
 import StoreDashboard from "./pages/storeadminpages/StoreDashboard";
@@ -72,13 +71,28 @@ import SMTP from "./pages/storeadminpages/SMTP";
 import CurrencyList from "./pages/storeadminpages/CurrencyList";
 import AddUserList from "./pages/storeadminpages/AddUserList";
 import AddRole from "./pages/storeadminpages/AddRole";
+import LoginSignup from "./components/common/Login";
+import QuotationList from "./pages/storeadminpages/QuotationList";
+import SalesReturnForm from "./pages/storeadminpages/SalesReturnForm";
+import PurchaseReturnForm from "./pages/storeadminpages/PurchaseReturnForm";
+import MoneyTransferForm from "./pages/storeadminpages/MoneyTransferForm";
+import DepositeForm from "./pages/storeadminpages/DepositeForm";
+import AddCategory from "./pages/storeadminpages/AddCategory";
+import AddBrand from "./pages/storeadminpages/AddBrand";
+import AddAdjustment from "./pages/storeadminpages/AddAdjustment";
+import AddTransfer from "./pages/storeadminpages/AddTransfer";
+import AddCountry from "./pages/storeadminpages/AddCountry";
+import AddExpenceCategory from "./pages/storeadminpages/AddExpenceCategory";
+import AddVariant from "./pages/storeadminpages/AddVariant";
+import AddState from "./pages/storeadminpages/AddState";
+import AddExpence from "./pages/storeadminpages/AddExpence";
 
 export default function Router() {
   return (
     <BrowserRouter>
       <Routes>
         {/* 🌐 Public Route */}
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={<LoginSignup />} />
 
         {/* POS OUTSIDE layout */}
         <Route
@@ -99,7 +113,7 @@ export default function Router() {
             </ProtectedRoute>
           }
         >
-          <Route index element={<Dashboard />} />
+          <Route index element={<DashboardScreen />} />
           <Route path="tenants" element={<Tenants />} />
           <Route path="planssection" element={<PlansSection />} />
           <Route path="subscription" element={<Subscription />} />
@@ -111,7 +125,7 @@ export default function Router() {
           <Route path="paymenttypesection" element={<PaymentTypeSection />} />
           <Route path="changepass" element={<ChangePass />} />
         </Route>
-         
+
         {/* ✅ STORE ADMIN ROUTES */}
         <Route
           path="/store"
@@ -122,6 +136,7 @@ export default function Router() {
             </ProtectedRoute>
           }
         >
+          <Route index element={<StoreDashboard />} />
           <Route path="dashboard" element={<StoreDashboard />} />
           <Route path="userlist" element={<Users />} />
           <Route path="adduserlist" element={<AddUserList />} />
@@ -147,6 +162,8 @@ export default function Router() {
           <Route path="createcoupon" element={<CreateCoupon />} />
           <Route path="CouponsMaster" element={<CouponsMaster />} />
           <Route path="newquotation" element={<NewQuotation />} />
+          <Route path="newquotation" element={<NewQuotation />} />
+          <Route path="quotationlist" element={<QuotationList />} />
           <Route path="newpurchase" element={<NewPurchase />} />
           <Route path="purchaselist" element={<PurchaseList />} />
           <Route path="purchasereturnlist" element={<PurchaseReturnList />} />
@@ -161,7 +178,8 @@ export default function Router() {
           <Route path="categorieslist" element={<CategoriesList />} />
           <Route path="brandlist" element={<BrandList />} />
           <Route path="variantlist" element={<VariantList />} />
-
+          <Route path="salesreturnform" element={<SalesReturnForm />} />
+          <Route path="purchasereturnform" element={<PurchaseReturnForm />} />
           <Route path="printvariables" element={<PrintVariable />} />
           <Route path="importitem" element={<ImportItem />} />
           <Route path="importservices" element={<ImportServices />} />
@@ -173,6 +191,17 @@ export default function Router() {
             element={<ExpenseCategoriesList />}
           />
           <Route path="countrieslist" element={<CountriesList />} />
+          <Route path="moneytransferform" element={<MoneyTransferForm />} />
+          <Route path="depositeform" element={<DepositeForm />} />
+          <Route path="addcategory" element={<AddCategory />} />
+          <Route path="addbrand" element={<AddBrand />} />
+          <Route path="addadjustment" element={<AddAdjustment />} />
+          <Route path="addtransfer" element={<AddTransfer />} />
+          <Route path="addcountry" element={<AddCountry />} />
+          <Route path="addstate" element={<AddState />} />
+          <Route path="addexpence" element={<AddExpence />} />
+          <Route path="addexpencecategory" element={<AddExpenceCategory />} />
+          <Route path="addvariant" element={<AddVariant />} />
           <Route path="statelist" element={<StateList />} />
           <Route path="sendmessage" element={<SendMessage />} />
           <Route path="messagingtemplate" element={<MessagingTemplate />} />
@@ -183,7 +212,7 @@ export default function Router() {
           <Route path="changepass" element={<ChangePass />} />
           <Route path="smsapi" element={<SmsApi />} />
           <Route path="smtp" element={<SMTP />} />
-
+          <Route path="taxlist" element={<TaxlistSection />} />
           <Route path="storetab" element={<StoreTab />} />
           <Route path="currencylist" element={<CurrencyList />} />
         </Route>

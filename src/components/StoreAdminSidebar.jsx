@@ -19,6 +19,16 @@ import {
   DollarSign,
   LucideShare,
   MailIcon,
+  User,
+  ShoppingCart,
+  Contact,
+  Ticket,
+  Calculator,
+  ChartCandlestick,
+  BanknoteArrowDown,
+  MapPinHouse,
+  Warehouse,
+  ArrowDownToLine,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -35,7 +45,7 @@ export default function StoreAdminSidebar() {
     {
       id: "users",
       name: "Users",
-      icon: Store,
+      icon: User,
       submenu: [
         { name: "Userlist", path: "/store/userlist", icon: List },
         { name: "RolesList", path: "/store/rolesList", icon: List },
@@ -44,7 +54,7 @@ export default function StoreAdminSidebar() {
     {
       id: "sales",
       name: "Sales Management",
-      icon: CreditCard,
+      icon: ShoppingCart,
 
       submenu: [
         { name: "POS", path: "pos", icon: CirclePlus },
@@ -61,7 +71,7 @@ export default function StoreAdminSidebar() {
     {
       id: "Contacts",
       name: "Contacts",
-      icon: Truck,
+      icon: Contact,
       submenu: [
         { name: "Add Customer", path: "/store/addcustomer", icon: CirclePlus },
         {
@@ -95,7 +105,7 @@ export default function StoreAdminSidebar() {
     {
       id: "coupons",
       name: "coupons",
-      icon: Lock,
+      icon: Ticket,
       submenu: [
         {
           name: "Create Customer Coupon",
@@ -118,7 +128,7 @@ export default function StoreAdminSidebar() {
     {
       id: "quotation",
       name: "Quotation",
-      icon: DollarSign,
+      icon: Calculator,
       submenu: [
         {
           name: "New Quotation",
@@ -198,7 +208,7 @@ export default function StoreAdminSidebar() {
           icon: List,
         },
         {
-          name: "Print Variables",
+          name: "Print Labels",
           path: "/store/printvariables",
           icon: List,
         },
@@ -217,7 +227,7 @@ export default function StoreAdminSidebar() {
     {
       id: "Stock",
       name: "Stock",
-      icon: Settings,
+      icon: ChartCandlestick,
       submenu: [
         { name: "Adjustment List", path: "/store/adjustmentlist", icon: List },
         { name: "Transfer List", path: "/store/transferlist", icon: List },
@@ -227,7 +237,7 @@ export default function StoreAdminSidebar() {
     {
       id: "expenses",
       name: "Expenses",
-      icon: MessageSquare,
+      icon: BanknoteArrowDown,
       submenu: [
         { name: "Expenses List", path: "/store/expenseslist", icon: List },
         {
@@ -240,7 +250,7 @@ export default function StoreAdminSidebar() {
     {
       id: "places",
       name: "Places",
-      icon: MessageSquare,
+      icon: MapPinHouse,
       submenu: [
         { name: "Countries List", path: "/store/countrieslist", icon: List },
         {
@@ -266,7 +276,7 @@ export default function StoreAdminSidebar() {
     {
       id: "Warehouse",
       name: "Warehouse",
-      icon: Truck,
+      icon: Warehouse,
       submenu: [
         {
           name: "Add Warehouse",
@@ -292,7 +302,7 @@ export default function StoreAdminSidebar() {
         },
         {
           name: "Site Settings",
-          path: "/store/warehouselist",
+          path: "/store/SiteSetting",
           icon: List,
         },
         {
@@ -332,8 +342,8 @@ export default function StoreAdminSidebar() {
         },
         {
           name: "Database Backup",
-          path: "/store/warehouselist",
-          icon: List,
+          icon: ArrowDownToLine,
+          download: true,
         },
       ],
     },
@@ -347,6 +357,12 @@ export default function StoreAdminSidebar() {
   // ✅ Handle Main Menu Click
   const handleMainMenuClick = () => {
     setOpenDropdown(null);
+  };
+  const downloadBackupFile = () => {
+    const link = document.createElement("a");
+    link.href = "/full.jpg"; // from public
+    link.download = "full.jpg";
+    link.click();
   };
 
   return (
@@ -404,22 +420,35 @@ export default function StoreAdminSidebar() {
                   transition={{ duration: 0.3 }}
                   className="bg-gray-50 rounded-md shadow-inner overflow-hidden"
                 >
-                  {menu.submenu.map((sub) => (
-                    <NavLink
-                      key={sub.name}
-                      to={sub.path}
-                      className={({ isActive }) =>
-                        `w-full flex items-center space-x-3 px-10 py-2.5 text-sm transition-all duration-200 ${
-                          isActive
-                            ? "bg-sky-100 text-sky-600 font-medium"
-                            : "text-gray-600 hover:bg-gray-100"
-                        }`
-                      }
-                    >
-                      {sub.icon && <sub.icon className="w-4 h-4" />}
-                      <span>{sub.name}</span>
-                    </NavLink>
-                  ))}
+                  {menu.submenu.map((sub) =>
+                    sub.download ? (
+                      // 🚀 DOWNLOAD ITEM (NO NAVIGATION)
+                      <button
+                        key={sub.name}
+                        onClick={downloadBackupFile}
+                        className="w-full flex items-center space-x-3 px-10 py-2.5 text-sm text-gray-600 hover:bg-gray-100 transition-all duration-200"
+                      >
+                        {sub.icon && <sub.icon className="w-4 h-4" />}
+                        <span>{sub.name}</span>
+                      </button>
+                    ) : (
+                      // 🚀 NORMAL NAVLINK
+                      <NavLink
+                        key={sub.name}
+                        to={sub.path}
+                        className={({ isActive }) =>
+                          `w-full flex items-center space-x-3 px-10 py-2.5 text-sm transition-all duration-200 ${
+                            isActive
+                              ? "bg-sky-100 text-sky-600 font-medium"
+                              : "text-gray-600 hover:bg-gray-100"
+                          }`
+                        }
+                      >
+                        {sub.icon && <sub.icon className="w-4 h-4" />}
+                        <span>{sub.name}</span>
+                      </NavLink>
+                    )
+                  )}
                 </motion.div>
               )}
             </AnimatePresence>

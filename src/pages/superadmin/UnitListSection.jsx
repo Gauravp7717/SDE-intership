@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import DataTable from "../components/DataTable";
+import DataTable from "../../components/DataTable";
 
 export default function UnitListSection() {
   const [activePage, setActivePage] = useState("list");

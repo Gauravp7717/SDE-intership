@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Mail, Lock, User, Eye, EyeOff } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../../context/AuthContext";
 
 export default function LoginSignup() {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -31,7 +31,6 @@ export default function LoginSignup() {
       });
 
       result = { success: true, role: "superadmin" };
-
     } else if (username === "storeadmin" && password === "admin12") {
       login({
         role: "storeadmin",
@@ -41,7 +40,6 @@ export default function LoginSignup() {
       });
 
       result = { success: true, role: "storeadmin" };
-
     } else {
       result = { success: false, message: "Invalid username or password" };
     }
@@ -61,11 +59,12 @@ export default function LoginSignup() {
   return (
     <div className="flex items-center justify-center min-h-screen bg-white">
       <div className="relative w-full h-full md:h-[776px] bg-white overflow-hidden flex">
-
         {/* ---------------------- SIGN IN ---------------------- */}
         <div
           className={`absolute pb-3 pt-3 bottom-0 md:top-0 left-0 w-full md:w-1/2 md:h-full flex flex-col items-center justify-center bg-white px-8 transition-all duration-700 ease-in-out ${
-            isSignUp ? "-translate-x-full opacity-0" : "translate-x-0 opacity-100"
+            isSignUp
+              ? "-translate-x-full opacity-0"
+              : "translate-x-0 opacity-100"
           }`}
         >
           <img
@@ -82,7 +81,6 @@ export default function LoginSignup() {
           </p>
 
           <form onSubmit={handleSubmit} className="w-full max-w-[300px]">
-            
             {/* Username */}
             <div className="relative mb-2">
               <Mail className="absolute left-3 top-1 text-gray-400" size={17} />
@@ -156,7 +154,9 @@ export default function LoginSignup() {
         {/* ---------------------- SIGN UP ---------------------- */}
         <div
           className={`absolute pb-3 pt-3 bottom-0 md:top-0 right-0 w-full md:w-1/2 md:h-full flex flex-col items-center justify-center bg-white px-8 transition-all duration-700 ease-in-out ${
-            isSignUp ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"
+            isSignUp
+              ? "translate-x-0 opacity-100"
+              : "translate-x-full opacity-0"
           }`}
         >
           <img
@@ -169,8 +169,10 @@ export default function LoginSignup() {
             Create Account
           </h2>
 
-          <form onSubmit={(e) => e.preventDefault()} className="w-full max-w-[300px]">
-            
+          <form
+            onSubmit={(e) => e.preventDefault()}
+            className="w-full max-w-[300px]"
+          >
             <div className="relative mb-2">
               <User className="absolute left-3 top-1 text-gray-400" size={17} />
               <input

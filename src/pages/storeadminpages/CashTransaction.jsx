@@ -147,7 +147,6 @@ const CashTransaction = () => {
         showSearch={true}
         showPagination={true}
         addButtonText="Add Payment"
-        onAdd={() => {}}
         onEdit={handleEdit}
         onDelete={handleDelete}
       />

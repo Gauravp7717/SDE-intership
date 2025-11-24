@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
-import { motion } from "framer-motion";
-import DataTable from "../components/DataTable"; // ✅ Import reusable DataTable
+
+import DataTable from "../../components/DataTable";
 
 export default function PaymentTypeSection() {
   const [showNewUnitForm, setShowNewUnitForm] = useState(false);
@@ -81,34 +81,17 @@ export default function PaymentTypeSection() {
     <div className="p-6 min-h-screen">
       {/* Modal */}
       {showNewUnitForm && (
-        <motion.div
-          className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-        >
-          <motion.div
+        <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50">
+          <div
             ref={modalRef}
             className="p-6 bg-white rounded-2xl shadow-lg max-w-2xl mx-auto w-[90%] sm:w-[80%] md:w-[60%] lg:w-[50%]"
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
           >
-            <motion.h2
-              className="text-xl font-bold mb-6 text-gray-800 text-center"
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-            >
+            <h2 className="text-xl font-bold mb-6 text-gray-800 text-center">
               Add / Update Payment Type
-            </motion.h2>
+            </h2>
 
             <div className="space-y-5">
-              <motion.div
-                initial={{ opacity: 0, x: -30 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.3 }}
-              >
+              <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Payment Type Name <span className="text-red-500">*</span>
                 </label>
@@ -117,36 +100,31 @@ export default function PaymentTypeSection() {
                   value={unitName}
                   onChange={(e) => setUnitName(e.target.value)}
                   className="w-full sm:w-3/4 px-4 py-2 border border-gray-300 rounded-lg 
-                    focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none 
-                    transition-all duration-200 shadow-sm hover:shadow-md"
+              focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none 
+              transition-all duration-200 shadow-sm hover:shadow-md"
                   placeholder="Enter payment type name"
                 />
-              </motion.div>
+              </div>
             </div>
 
-            <motion.div
-              className="flex flex-col sm:flex-row sm:space-x-4 mt-8 justify-center space-y-3 sm:space-y-0"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
-            >
+            <div className="flex flex-col sm:flex-row sm:space-x-4 mt-8 justify-center space-y-3 sm:space-y-0">
               <button
                 onClick={handleSave}
                 className="px-6 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 
-                  transition-transform transform hover:scale-105 duration-200 shadow-sm"
+            transition-transform transform hover:scale-105 duration-200 shadow-sm"
               >
                 Save
               </button>
               <button
                 onClick={handleClose}
                 className="px-6 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 
-                  transition-transform transform hover:scale-105 duration-200 shadow-sm"
+            transition-transform transform hover:scale-105 duration-200 shadow-sm"
               >
                 Close
               </button>
-            </motion.div>
-          </motion.div>
-        </motion.div>
+            </div>
+          </div>
+        </div>
       )}
 
       {/* ===== Reusable DataTable ===== */}

@@ -1,5 +1,6 @@
 import React from "react";
 import DataTable from "../../components/DataTable"; // adjust import as needed
+import { useNavigate } from "react-router-dom";
 
 const countries = [
   { countryName: "Zimbabwe", status: "Active" },
@@ -37,6 +38,10 @@ const columns = [
 const CountriesList = () => {
   const handleEdit = (row) => alert(`Edit country: ${row.countryName}`);
   const handleDelete = (row) => alert(`Delete country: ${row.countryName}`);
+  const navigate = useNavigate();
+  const handeladd = (path) => {
+    navigate(path);
+  };
 
   return (
     <div className="p-6 space-y-6">
@@ -48,7 +53,9 @@ const CountriesList = () => {
         showSearch={true}
         showPagination={true}
         addButtonText="Add Country"
-        onAdd={() => {}}
+        onAdd={() => {
+          handeladd("/store/addcountry");
+        }}
         onEdit={handleEdit}
         onDelete={handleDelete}
       />
